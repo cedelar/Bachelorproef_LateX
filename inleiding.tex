@@ -1,0 +1,52 @@
+%%=============================================================================
+%% Inleiding
+%%=============================================================================
+
+\chapter{Inleiding}
+\label{ch:inleiding}
+
+\section{Probleemstelling}
+\label{sec:probleemstelling}
+
+Momenteel is Aucxis, het bedrijf waar ik mee samenwerk voor het schrijven van deze bachelorproef, bezig met het uitwerken van hun Polaris platform. Het voornaamste doel van dit platform is het kunnen volgen van voorwerpen binnen en buiten bedrijven. Dit aan de hand van verschillende technologieën, voornamelijk RFID en BLE binnen het bedrijf, en GPS daarbuiten. 
+Het concept van dit platform is dat er logische locaties bestaan (zoals warenhuis 1 of keuken), waar de voorwerpen zich bevinden. Voor een goede werking van dit systeem is het dus duidelijk nodig dat uit de data bekomen uit de hardware kan afgeleid worden op welke logische locatie een voorwerp zich bevind en wanneer het zich verplaatst tussen locaties. Dit is geen normaal softwareprobleem want logischerwijs zal de manier waarop de hardware staat opgesteld een grote invloed hebben op de nauwkeurigheid en correctheid van deze lokalisaties en verplaatsingen. Hierdoor is het dus van groot belang voor de correcte werking van dit platform dat een goede opstelling wordt gekozen en om dit te kunnen doen is er dus een onderzoek nodig naar wat deze optimale opstelling zou kunnen zijn. Dit is dus ook de reden dat dit onderzoek in het leven is geroepen.
+
+\section{Wie is Aucxis}
+\label{sec:wie-is-aucxis}
+Aucxis is een bedrijf gevestigd te Stekene, welke actief is sinds 1983. Bij oprichting was het een bedrijf dat zich toespitste op het ontwikkelen van eenderzijds de bewaring (Procescontrole), en anderzijds de veilinginfrastructuur (E-trade) voor groenten en fruit. Het werd hier vrij snel een toonaangevend bedrijf en werd wereldleider tegen 2000. Later, in 2007 richtten ze een 3e businessunit op, namelijk de RFID divisie, welke zich focust op het onderzoek naar en ontwikkeling van RFID toepassingen. Vandaag is het nog steeds een toonaangevend bedrijf met in-house oplossingen voor allerhande toepassingen binnen deze sectoren en zijn ze nog steeds actief bezig aan de optimalisering en uitbreiding hiervan. Recentelijk zijn ze ook geïnteresseerd geworden in het uitbreiden van hun praktijken naar BLE toepassingen.
+
+\section{Onderzoeksvraag}
+\label{sec:onderzoeksvraag}
+
+Zoals duidelijk is geworden in de probleemstelling is er nood aan een onderzoek voor het vinden van een zo optimaal mogelijke opstelling voor het bepalen van locaties waar een voorwerp zich bevind, en de verplaatsing van een voorwerp tussen die locaties. Met oog op deze probleemstelling luidt de onderzoeksvraag voor deze bachelorproef als volgt:
+\begin{center}
+	\textbf{Welke hardwareopstelling, bestaande uit RFID of BLE componenten, is optimaal voor de plaats- en verplaatsingsbepaling van een voorwerp binnen een gebouw.}
+\end{center}
+Deze vraag omvangt goed de essentie van de situatie die dient onderzocht te worden, namelijk de beste opstelling voor het volgen van een voorwerp binnen een gebouw, en dit met RFID of BLE technologie. Binnen de probleemstelling werd echter ook aangegeven dat binnen de scope van Polaris ook gps lokalisatie voor voorwerpen buiten het bedrijf aanwezig was. Locatiebepaling met behulp van gps is echter al goed ingeburgerd, waardoor er voldoende bronnen zijn en dit ook duidelijk en precies is, waardoor het geen nut heeft dit ook te onderzoeken en dus wordt dit onderdeel buiten de scope van deze bachelorproef gehouden. Plaatsbepalingen binnen zijn echter niet zo optimaal voor gps aangezien de meeste gebouwen/kantoren beschikken over verdiepen (waar er dus meerdere locaties dezelfde geografische coördinaat hebben), en gps ook een bepaalde onzekerheid heeft op de meting.
+
+\section{Onderzoeksdoelstelling}
+\label{sec:onderzoeksdoelstelling}
+
+Het hoofddoel van deze bachelorproef is het vergelijken van een aantal opstellingen, met RFID of met BLE, met verschillende concepten waarom ze werken. deze verschillende opstellingen met hun theoretische achtergrond volgen verder in dit verslag. Zoals de onderzoeksvraag echter al doet vermoeden is het doel niet louter een vergelijkende studie, aangezien het ook de bedoeling is dat er een optimale opstelling uit de bus komt. 
+In praktijk zal er nooit een opstelling zijn die de beste is, aangezien er altijd een afweging zal zijn tussen de beste bepaling, en de kostprijs van de opstelling. Ook zullen sommige opstellingen beter zijn in bepaalde situaties dan andere. Wel zal het mogelijk zijn om totaal onpraktische en onnauwkeurige opstellingen uit te branden. De conclusie zal dus eerder een afweging geven tussen de verschillende opstellingen, maar zal zeker geen louter vergelijkende aard hebben.
+
+\section{Opzet van deze bachelorproef}
+\label{sec:opzet-bachelorproef}
+
+% Het is gebruikelijk aan het einde van de inleiding een overzicht te
+% geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
+% die je kan aanvullen/aanpassen in functie van je eigen tekst.
+
+De rest van deze bachelorproef is als volgt opgebouwd:
+
+In Hoofdstuk~\ref{ch:literatuurstudie} wordt een overzicht gegeven van de theoretische achtergrond die nodig is voor het begrijpen van het onderzoek en de rest van deze bachelorproef. Het bevat informatie over de werking van de RFID en BLE technologieën, definities van veelvoorkomende begrippen en diverse andere nodige uitleg.
+
+% TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
+% TODO: Aanpassen als geschreven
+
+In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
+
+In Hoofdstuk~\ref{ch:opstellingen} worden de verschillende bestudeerde opstellingen opgesomd, samen met de theoretische achtergrond.
+
+In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+
