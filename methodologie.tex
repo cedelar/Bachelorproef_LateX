@@ -11,5 +11,18 @@
 %% mogelijke manier toegepast hebt om een antwoord te vinden op de
 %% onderzoeksvraag.
 
-\lipsum[21-25]
+Het hoofddoel, namelijk het bepalen van een optimale hardwareopstelling, zal in eerste instantie opgedeeld worden in enkele deelonderzoeken, 1 deelonderzoek per hardwareopstelling. Elk deelonderzoek zal verder onderverdeeld worden in een deelhypothese (Hoe de opstelling in theorie zou moeten presteren, opgebouwd uit veronderstellingen en theoretische waarheden aangehaald in Hoofdstuk~\ref{ch:literatuurstudie}), enkele experimenten, en een deelconclusie. Deze deelconclusie zal een vergelijking zijn tussen de hypothese en de eigenlijke uitkomst, een opsomming van de voor- en nadelen, een categorisatiescore (Hoeveel procent van de gemeten beacons kan juist geplaatst worden aan de hand van de data en het lokalisatieprincipe) en een uiteenzetting over de factoren die al dan niet aanwezig moeten zijn om het principe acceptabel te maken. Ten slotte zullen de deelconclusies vergeleken worden en zal er een algemene conclusie bepaald worden. De onderzochte opstellingen, 12 in totaal, zijn hoogstwaarschijnlijk niet alle mogelijke manieren waarop de onderzoeksopzet, namelijk het registreren van verplaatsingen, kan gebeuren. De bepaling van deze set zijn het resultaat van een overleg met Aucxis welke opstellingen het meest kans hebben om te werken, en het interessantst zijn voor hen om onderzocht te zien. Voor de oplijsting van deze opstellingen, samen met een korte theoretische achtergrond verwijs ik de lezer naar Hoofdstuk~\ref{ch:opstellingen}.
+
+Voordat er experimenten kunnen gebeuren is het belangrijk een oplijsting te maken van enkele constanten doorheen het onderzoek. Voornamelijk op het vlak van de gebruikte hardware en de standaardinstellingen waarmee dit onderzoek zal gebeuren. Deze constanten zijn geldig gedurende het volledige onderzoek, tenzij anders aangegeven.
+
+\section{RFID}
+Voor de RFID opstellingen wordt gebruik gemaakt van KEONN Advantenna-p11 antennes, dit zijn vlakke, wide beam antennes. Ze stralen dus voor zich uit met een relatief wijd veld van 90° volgens zowel de x- als y-as \autocite{Keonn}. Deze zijn dus ideaal om te bepalen of er een tag voor de antenne passeert.
+Als tranceiver wordt een 4-port IMPINJ Speedway Revolution gebruikt, deze maakt het mogelijk om 4 antennes tegelijk aan te sluiten. De gebruikte tags zijn standaard RFID tags van ~9 x 1.5cm, met 1 antenne in 1 richting. Verder zenden de antennes een EM veld uit met Tx = 20dB. De resultaten van de test worden opgevangen en gevisualiseerd met ARTA.
+
+\section{BLE}
+In de BLE opstellingen wordt gebruik gemaakt van MIKROTIK Knot IoT Gateways, welke hun data over de waargenomen BLE beacons elke 30s zullen doorsturen via een MQTT queue naar een custom tussenprogramma, welke deze data zal exporteren naar een .xlsx bestand, waarna het kan geanalyseerd en gevisualiseerd worden. Als beacon worden er verschillende modellen MOKOSMART beacons gebruikt, welke zullen benoemd worden per experiment. Deze staan ingesteld op een Tx Power van -12dB, en sturen 1 bericht per seconde.
+
+
+
+
 

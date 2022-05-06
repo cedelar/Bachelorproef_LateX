@@ -1,4 +1,4 @@
-\chapter{\IfLanguageName{dutch}{Opstellingen}{Opstellingen}}
+\chapter{Opstellingen}
 \label{ch:opstellingen}
 
 In dit hoofdstuk zullen de 12 verschillende opstellingen die in het volgende hoofdstuk onderzocht worden opgelijst worden, samen met een ruwe schets van hoe deze opstelling eruit zal zien en een korte uitleg over hoe deze opstelling theoretisch zou moeten werken en de voor- en nadelen ervan.
@@ -28,16 +28,16 @@ Elk van volgende opstellingen zal gebruik maken van een bijhorende figuur, gebas
 
 \subsubsection{1 antenne aan deurlijst}
 \begin{minipage}{0.65\textwidth}
-Deze opstelling is de eenvoudigste en 1 van de opstellingen die momenteel wordt gebruikt door Aucxis, ze is voornamelijk opgenomen in dit onderzoek als referentie. Het concept bij deze opstelling is dat aan elke deurlijst 1 RFID antenne hangt. Als er een tag voorbij de antenne gaat registreert deze dit en weten we dar er een beweging heeft plaatsgevonden. Of deze in of uit de locatie is kan niet uit deze data alleen afgeleid worden, dit kan enkel in combinatie met de informatie wat zijn locatie was voor de verplaatsing. Dit is een nadeel aan deze opstelling.
+Deze opstelling is de eenvoudigste en is 1 van de opstellingen die momenteel wordt gebruikt door Aucxis, ze is voornamelijk opgenomen in dit onderzoek als referentie. Het concept bij deze opstelling is dat aan elke deurlijst 1 RFID antenne hangt. Als er een tag voorbij de antenne gaat registreert deze dit is er dus een beweging geregistreerd. Of deze in of uit de locatie is kan niet uit deze data alleen afgeleid worden, dit kan enkel in combinatie met de informatie wat zijn locatie was voor de verplaatsing. 
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
 	\includegraphics[width=\linewidth]{rfid_static_1}
 \end{minipage}
 
-\subsubsection{2 antenne aan deurlijst}
+\subsubsection{2 antennes aan deurlijst}
 \begin{minipage}{0.65\textwidth}
-Dit is ook 1 van de opstellingen die momenteel wordt gebruikt door Aucxis en dus ook voornamelijk een referentiepunt. Het principe is ongeveer hetzelfde als bij de vorige opstelling, echter is hier het voordeel dat de richting van de verplaatsing wel bekend is aan de hand van het tijdsverschil tussen de detecties van de tag. In dit opzicht is het dus beter dan de vorige opstelling, maar is uiteraard duurder door de hogere aantallen benodigde antennes. 
+Ook dt is 1 van de opstellingen die momenteel wordt gebruikt door Aucxis en is dus ook voornamelijk een referentiepunt. Het principe is hetzelfde als bij de vorige opstelling, echter is het voordeel hier dat de richting van de verplaatsing wel bekend is, dit aan de hand van het tijdsverschil tussen de detecties van de tag. In dit opzicht is het dus beter dan de vorige opstelling, maar is uiteraard duurder door de hogere aantallen benodigde antennes en de extra benodigde poorten in de tranceivers.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -46,7 +46,7 @@ Dit is ook 1 van de opstellingen die momenteel wordt gebruikt door Aucxis en dus
 
 \subsubsection{1 antenne tegenover deur}
 \begin{minipage}{0.65\textwidth}
-Bij deze opstelling wordt een RFID antenne tegenover de deur geplaatst, het idee hierachter is het feit dat, aangezien de RSSI afhankelijk is van de afstand tussen de antenne en de tag, het in theorie zichtbaar is aan de verandering in RSSI in welke richting de tag gaat. Ook geeft de antenne een doppler waarde mee, welke in theorie ook veranderd naargelang de richting. Als dit in praktijk blijkt te werken wilt dit zeggen dat er richtingsdetectie mogelijk is met 1 antenne, waardoor het sowieso al beter is dan de vorige 2 opstellingen. Nadeel is wel dat de kamer niet te breed mag zijn zodat de antenne ook tegenover de deur kan worden gemonteerd.
+Bij deze opstelling wordt een RFID antenne tegenover de deur geplaatst, het idee hierachter is het feit dat, aangezien de RSSI afhankelijk is van de afstand tussen de antenne en de tag, het in theorie zichtbaar is aan de verandering in RSSI in welke richting de tag gaat. Ook geeft de antenne een doppler waarde mee, welke in theorie ook veranderd naargelang de richting. Als dit in praktijk blijkt te werken wilt dit zeggen dat er richtingsdetectie mogelijk is met 1 antenne, waardoor het sowieso al beter is dan de vorige 2 opstellingen. De verwachting is wel dat de kamer niet te breed mag zijn, zodat de antenne van de gemonteerde antenne tot de deur niet te groot is.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -56,14 +56,15 @@ Bij deze opstelling wordt een RFID antenne tegenover de deur geplaatst, het idee
 
 \subsubsection{1 tag aan deurlijst}
 \begin{minipage}{0.65\textwidth}
-Hier hangt er een RFID-tag aan de deurlijst (analoog aan de antenne bij de eerste statische opstelling). Als de antenne passeert aan de deur weet het aggregatieprogramma in theorie dat alle tags tussen nu en het passeren van deze of een andere locatie RFID-tag tot deze locatie behoren.
+Hier hangt er een RFID-tag aan de deurlijst (analoog aan de antenne bij de eerste statische opstelling). Als de antenne passeert aan de deur weet het aggregatieprogramma in theorie dat alle tags tussen nu en het passeren van deze of een andere locatie RFID-tag tot deze locatie behoren. Hier is ook een opsplitsing in de RFID-tags nodig, nl. of het een locatie of een asset tag is.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
 	\includegraphics[width=\linewidth]{rfid_dynamic_1}
 \end{minipage}
+\\[200pt]
+In theorie is het ook mogelijk de 2 andere statische scenario's een dynamische variant te geven, echter valt hun voordeel van richtingbepalend zijn weg hierbij aangezien de detectie richting niet meer zo nuttig is bij een dynamische opstelling, aangezien er door de aard van dit type opstelling sowieso meer dan 1 scanevent zal gebruikt worden voor de locatiebepaling. Deze worden dus buiten beschouwing gelaten.
 
-In theorie is het ook mogelijk de 2 andere statische scenario's een dynamische variant te geven, echter valt hun voordeel van richtingbepalend zijn weg hierbij aangezien de richting niet meer relevant is bij dynamisch. Deze worden dus buiten beschouwing gelaten.
 
 \section[BLE]{De BLE opstellingen}
 \label{ch:ble}
@@ -72,7 +73,7 @@ In theorie is het ook mogelijk de 2 andere statische scenario's een dynamische v
 
 \subsubsection{1 gateway per locatie}
 \begin{minipage}{0.65\textwidth}
-Deze opstelling is de eenvoudigste en meest intuïtieve van de BLE opstellingen. Elke locatie komt overeen met 1 IoT Gateway, die gepositioneerd wordt ongeveer in het middelpunt van de locatie. Het idee hierachter is dat de Gateway waar de beacon het dichtste bij is (de beste RSSI heeft), hoogstwaarschijnlijk de locatie is waar het voorwerp zich bevind. Dit is echter niet 100\% correct, en deze onnauwkeurigheid zal enkel maar groeien als de gateways/locaties onevenredig verdeeld zijn over de oppervlakte van het gebouw. 
+Deze opstelling is de eenvoudigste en meest intuïtieve van de BLE opstellingen. Elke locatie komt overeen met 1 IoT Gateway, die gepositioneerd wordt ongeveer in het middelpunt van de locatie. Het idee hierachter is dat de Gateway waar de beacon zich het dichtste bij bevind, en dus de beste RSSI heeft, de locatie is waar het voorwerp zich bevind. Echter is de verwachting dat dit niet volledig zal kloppen, en dat er hier zeker onnauwkeurigheden zullen ontstaan, specifiek als de locaties niet evenredig verdeeld zijn over het gebouw.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -81,16 +82,16 @@ Deze opstelling is de eenvoudigste en meest intuïtieve van de BLE opstellingen.
 
 \subsubsection{Meerdere gateways per locatie}
 \begin{minipage}{0.65\textwidth}
-In deze opstelling wordt een locatie gedefinieerd door meer dan 1 gateway, nl. een gateway per hoek van de locatie, zodat de locatie wordt omringd door een kader van gateways. Hiermee kan in theorie zeer gedetailleerd worden afgeleid waar de beacon zich bevind, maar de kost voor de opstelling vliegt vrij snel de hoogte in als er veel locaties zijn. Wel kunnen gedeelde hoeken van locaties door een gedeelde beacon worden bezet.
+In deze opstelling wordt een locatie gedefinieerd door meer dan 1 gateway, nl. een gateway per hoek van de locatie, zodat de locatie wordt omringd door een kader van gateways. Het idee hierbij is dat er aan de data kan afgeleid worden of de beacon zich al dan niet in het vak tussen de gateways bevind. Echter zal de kost voor de opstelling vrij snel de hoogte in vliegen als er veel locaties zijn. Wel kunnen gedeelde hoeken van locaties door een gedeelde beacon worden bezet, wat ook zo zal zijn in de testopstellingen.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
 	\includegraphics[width=\linewidth]{ble_statisch_2}
 \end{minipage}
 
-\subsubsection{Rasteropstelling}
+\subsubsection{Gateways in rasteropstelling}
 \begin{minipage}{0.65\textwidth}
-Deze opstelling bestaat uit een raster welke volledig het gebouw omvat. Als de locaties van deze gateways bekend zijn kan via trigonometrie en de gemeten RSSI waardes berekend worden waar de voorwerpen zich bevinden, wat dan gelinkt kan worden aan een locatie. Dit is vrij precies en schaalt goed, maar nadelig is wel dat de locaties volledig gespecificeerd en bijgehouden moeten worden want er kan niet enkel op data van de gateways worden afgegaan om de locatie te bepalen aangezien de gateways en de locaties niks meer met elkaar te maken hebben.
+Deze opstelling bestaat uit een raster welke volledig het gebouw omvat. Als de locaties van deze gateways bekend zijn kan via trilateratie en de gemeten RSSI waardes berekend worden waar de voorwerpen zich bevinden, wat dan gelinkt kan worden aan een locatie. De verwachting is dat hieraan de locatie vrij specifiek kan worden bepaald, maar nadelig is wel dat de locaties volledig gespecificeerd en bijgehouden moeten worden, daardoor kan er niet enkel op data van de gateways worden afgegaan om de locatie te bepalen aangezien in de opstelling de gateways en de locaties niks met elkaar te maken hebben. Deze opstelling lijkt wel meer en eenvoudiger opschaalbaar naar grotere gebouwen of gebouwen met veel dicht bij elkaar liggende locaties.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -100,17 +101,49 @@ Deze opstelling bestaat uit een raster welke volledig het gebouw omvat. Als de l
 
 \subsection{Dynamisch}
 
-\subsubsection{1 beacon per locatie, midden van kamer}
-%TODO
+Bij elk van volgende opstellingen zal een onderscheid gemaakt worden in de BLE beacons, nl. de locatie- en de asset-beacons.
+
+\subsubsection{1 beacon per locatie, midden van locatie}
+\begin{minipage}{0.65\textwidth}
+In deze opstelling bevinden de locatiebeacons zich in het midden van de locatie die ze vertegenwoordigen, met als achterliggend idee dat de assetbeacons die vanop verschillende meettijdstippen in de gang en gelijkaardige RSSI waarde hebben aan de locatiebeacon, deze hierbij in de buurt zullen liggen en zich dus in zijn locatie zullen bevinden.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+	\includegraphics[width=\linewidth]{ble_dynamic_1}
+\end{minipage}
 
 \subsubsection{1 beacon per locatie, aan deur}
-%TODO
+\begin{minipage}{0.65\textwidth}
+Deze opstelling is qua concept gelijkaardig aan de vorige, het verschil is dat bij deze opstelling de locatiebeacons zich bevinden aan de deur van de locatie/tussen de locatie en de gang. De hypothese is dat hierdoor de mobiele gateway in de gang deze beacon beter kan detecteren, en zijn locatie in de gang beter kan bepalen waardoor kan verondersteld worden dat de assetbeacons die goed worden ontvangen als hij in de buurt is van een locatiebeacon ook op die locatie liggen. Ook is er hier geen beacon aanwezig op de overgang tussen 2 locaties die niet via de gang verloopt, aangezien de mobiele gateway hier niet komt.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+	\includegraphics[width=\linewidth]{ble_dynamic_2}
+\end{minipage}
 
-\subsubsection{< 1 beacon per locatie}
-%TODO
+\subsubsection{Meerdere locatiebeacons per locatie}
+\begin{minipage}{0.65\textwidth}
+Dit is de dynamische tegenhanger van het 2e statische scenario, echter wordt in dit geval de locatie omringen door locatiebeacons. Hier is het principe dat, als een assetbeacon vanuit verschillende locaties in dezelfde range van RSSI valt als de locatiebeacons van een bepaalde locatie, hij zich waarschijnlijk ook op die locatie zal bevinden.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+	\includegraphics[width=\linewidth]{ble_dynamic_3}
+\end{minipage}
 
-\subsubsection{> 1 beacon per locatie}
-%TODO
+\subsubsection{Beacons in rasteropstelling}
+\begin{minipage}{0.65\textwidth}
+Dit is de dynamische tegenhanger van het 3e statische scenario, nl. een raster van locatiebeacons. In theorie kunnen hierbij de locaties van de assetbeacons bepaald worden door dubbele trilateratie, nl. de locatie van de mobiele gateway kan bepaald worden op 3 meetpunten a.d.h.v. de geweten locatie van de locatiebeacons, en uit deze 3 locaties kan dan nog eens via trilateratie de locatie van de assetbeacons worden bepaald. Het vermoeden bestaat echter dat dit onnauwkeurig kan zijn, verder wordt er ook verondersteld dat het asset niet beweegt tussen deze gebruikte meetpunten maar dit is bij uitbreiding voor elke dynamische opstelling zo.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+	\includegraphics[width=\linewidth]{ble_dynamic_4}
+\end{minipage}
 
 \subsubsection{beacons op intervallen in de gang}
-%TODO
+\begin{minipage}{0.65\textwidth}
+Bij deze opstelling worden er geen beacons in de locaties geplaatst, maar in de gang. Deze locatiebeacons bevinden zich op constante intervallen van elkaar. In theorie weet de mobiele gateway hieraan waar hij zich bevind in de gang, als er geweten is op welke 'afstand' in de gang welke locatie zich bevind kan er bepaald worden welke assetbeacons zich op welke locatie bevinden.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+	\includegraphics[width=\linewidth]{ble_dynamic_5}
+\end{minipage}
