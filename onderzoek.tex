@@ -8,17 +8,34 @@
 In dit hoofdstuk zullen de uitgevoerde experimenten en testen uiteengezet en besproken worden, volgens de richtlijnen aangehaald in Hoofdstuk~\ref{ch:methodologie}. Ze zullen gesorteerd staan volgens opstelling en gerangschikt in dezelfde volgorde als in Hoofdstuk~\ref{ch:opstellingen}.
 
 \section{RFID}
-Voor elk van volgende testen bestaat data over zowel de RSSI als het relatieve faseverschil. Het relatieve faseverschil heeft hetzelfde verloop als de RSSI, aangezien beide afhankelijk zijn van de afstand tussen de antenne en de tag, maar deze is meestal properder. In de uiteenzetting van de testen zal enkel 1 van deze 2 getoond worden, tenzij er een meerwaarde is van beide te tonen, maar de lezer moet er zich van bewust zijn dat beide voorhanden zijn en dat RSSI en fase wel eens door elkaar kan gebruikt worden. Ook is er bij alle statische testen data over in en uit de locatie, waarvan ook slechts 1 zal getoond worden tenzij beide een meerwaarde bied.
+Voor elk van volgende testen bestaat data over zowel de RSSI als het relatieve faseverschil. Het verloop van het relatieve faseverschil is gelijkaardig aan de RSSI, aangezien beide afhankelijk zijn van de afstand tussen de antenne en de tag. Alhoewel de grafieken van het relatieve faseverschil veelal een mooier verloop hebben, is er gekozen de conclusies van volgende testen te nemen op basis van de RSSI grafieken, dit aangezien de relatieve fase een berekende waarde is, berekend uit het absolute faseverschil. Deze berekening is echter niet in alle gevallen volledig correct, waardoor er onvoorziene fenomenen zouden kunnen optreden in algoritmes gebaseerd op deze data. Echter is het in theorie mogelijk dezelfde conclusies te bekomen gebaseerd op (correcte) absolute fasedata.
+Verder is er bij alle statische testen data over de in en de uit richting van de locatie, hiervan zal slechts 1 worden getoond aangezien beide richtingen dezelfde info verschaffen, dit uiteraard tenzij beide tonen een meerwaarde geeft.
+Alle volgende grafieken zijn gegenereerd door ARTA, waarin het helaas niet mogelijk is om een asbenaming te doen. In alle RSSI grafieken vertegenwoordigd de x-as te tijd (in seconden) en de y-as de RSSI waarde (in dBm).
 
 \subsection{1 antenne aan deurlijst}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling kan het voorbijkomen van een getagd asset waarnemen.
+
+\subsubsection{Test: PoC}
+Deze eerste en enige test voor deze opstelling is een Proof of concept test. Hier zal worden nagegaan of en hoe een voorbijkomende tag zal geregistreerd worden. Voor de opstelling is 1 antenne gebruikt die vlak aan een deurkader is gehangen, en de tag zal op een afstand van ~30 cm voorbij komen door het deurgat, dit in een horizontale positie in een evenwijdig vlak aan de antenne.
+
+\begin{minipage}{0.55\textwidth}
+In bijhorende grafiek is zichtbaar dat een voorbijkomende tag wordt geregistreerd door de reader met een piek in de RSSI waarde.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{0_RSSI}
+\end{minipage}
+
+\subsubsection{Deelconclusie}
+Uit deze test is duidelijk dat een voorbijkomende tag, bij uitbreiding een getagd asset die de locatie binnenkomt, correct geregistreerd zal worden door het systeem. De hypothese is dus bevestigd. Buiten deze simpele registratietest is er ook nood aan het testen van de invloed van tag oriëntatie en afstand tegenover de antenne. Deze fenomenen worden echter ook onderzocht in de volgende opstelling en zijn hier dus niet apart onderzocht. De beschouwingen en conclusies van test 1 en 2 in de opstelling met 2 antennes zijn dus ook toepasselijk op deze opstelling, uiteraard vereenvoudigd naar 1 antenne.
 
 \subsection{2 antennes aan deurlijst}
 \subsubsection{Deelhypothese}
 Deze opstelling kan het voorbijkomen en de richting van een getagd asset waarnemen, genomen dat de afstand tussen de tag en de antenne voldoende klein is.
 
 \subsubsection{Test 1: Oriëntatie van de tag}
-In deze eerste test wordt de invloed van de oriëntatie van de tag tegenover de antennes bepaald, aangezien deze oriëntatie in theorie een invloed heeft op de gemeten RSSI waarde. De opstelling voor deze test is als volgt: 2 antennes zijn in een deuropening geplaatst, naast elkaar. Bij het binnenkomen wordt eerst antenne 1, en daarna antenne 2 gepasseerd. Er worden 4 oriëntaties onderzocht, nl. horizontaal (a) en verticaal (b) in hetzelfde vlak als de antennes, en horizontaal (c) en verticaal (d) loodrecht op het vlak van de antennes. Voor elk van deze deeltesten geld een afstand tussen de tag en de antenne van ~30cm. Bij elk scenario is zowel de richting in als uit getest, echter zullen deze resultaten enkel beide worden getoond als er een meerwaarde is.
+In deze eerste test wordt de invloed van de oriëntatie van de tag tegenover de antennes bepaald, aangezien deze oriëntatie in theorie een invloed heeft op de gemeten RSSI waarde. De opstelling voor deze test is als volgt: 2 antennes zijn in een deuropening geplaatst, naast elkaar. Bij het binnenkomen wordt eerst antenne 1, en daarna antenne 2 gepasseerd. Er worden 4 oriëntaties onderzocht, nl. horizontaal (a) en verticaal (b) in een evenwijdig vlak aan de antennes, en horizontaal (c) en verticaal (d) loodrecht op het vlak van de antennes. Voor elk van deze deeltesten geld een afstand tussen de tag en de antenne van ~30cm. Bij elk scenario is zowel de richting in als uit getest, echter zullen deze resultaten enkel beide worden getoond als er een meerwaarde is.
 In theorie zouden a en b ruwweg dezelfde resultaten moeten geven, terwijl c en d een lagere RSSI zouden moeten geven. Echter zou het in elk geval detecteerbaar moeten zijn.
 
 \paragraph{a) Horizontaal in antennevlak}
@@ -191,8 +208,33 @@ Het vermoeden dat de resultaten beter zijn als er verder op de lijn voor de ante
 In ideale omstandigheden blijkt dit concept zeer goed te werken, echter zijn er enkele neveneffecten van een realistische draai door een deur die moeten gecompenseerd worden met een langere lengte op de lijn voor de antenne te lopen. De vooropgestelde hypothese is dus niet correct en moet aangevuld worden met deze nieuwe informatie. In praktijk wilt dit zeggen dat dit niet werkt voor een normale deuropening en vorige opstelling dus gebruikt zal moeten worden. Echter kan het wel een oplossing zijn voor een (korte) gang of dergelijke waar de assets sowieso door moeten om een berging of magazijn te bereiken, want vanaf er enige afstand wordt gedaan werkt dit wel zeer goed. 
 
 \subsection{1 tag aan deurlijst}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling is in staat om verspreide, getagde assets te detecteren en eenduidig een locatie toe te wijzen.
 
+\subsubsection{Test 1: Ideale situatie}
+De opstelling voor deze test is als volgt: Een rijdende kar is voorzien van een RFID-reader, of meer bepaald een vlakke antenne, welke opzij (rechts) is gericht. Verder is er een een locatie, bestaande uit 1 ommuurde ruimte, deze is voorzien van 1 locatie tag (Tagcode 4) aan het deurframe, langs de rechterkant (zodat de antenne op de kar de tag kan lezen bij het binnenkomen). Vervolgens bevinden zich verspreid over deze ruimte 4 assets (Tagcode 1, 2, 3 en 5), getagd met een asset tag. Als laatste is er aan de deurlijst aan de linker kant ook een locatie tag (Tagcode 6) aangebracht, voor een andere locatie dan deze. In en opstelling in productie zou deze aan de deur van een nieuwe locatie hangen, maar in deze opstelling is zijn functie louter om aan te geven wanneer de locatie wordt verlaten. Alle tags (zowel locatie als asset) bevinden zich op dezelfde hoogte als de antenne op de kar. De test is geslaagd als alle asset tags gemeten worden tussen het meten van eerst de locatie tag van de locatie zelf eenderzijds en, en de tag van de andere locatie anderzijds.
+
+\paragraph{Resultaat}
+De resultaten van deze test zijn ondergebracht in volgende grafiek. Met leesbaarheid in gedachten zijn de tijdsspannes tussen de registraties van de tags weggelaten uit de grafiek, in praktijk liggen deze verder uit elkaar in de tijd maar de volgorde is hier voornamelijk van belang. We kunnen zeer duidelijk zien dat deze test geslaagd is, we registreren eerst tag 4, welke duidelijk maakt dat we ons vanaf hier binnen de locatie bevinden. Elke asset tag die tussen dit moment, en het moment dat een andere locatie tag wordt gedetecteerd, ligt in deze locatie. De 2e locatie tag is de laatste die we detecteren dus er is correct bepaald dat alle assets zich in deze locatie bevinden. Wel zien we een groot verschil in aantal meetpunten, tag 5 wordt zo maar 2x gedetecteerd, in vergelijking tot de meer dan 50 meetpunten voor tag 3. Dit is echter niet geheel verrassend, aangezien het asset met tag 5 veel dieper in de kamer lag dan asset 3.
+
+\includegraphics[width=\linewidth]{6a_RSSI}
+
+\paragraph{Testconclusie}
+Het doel van de test, namelijk het detecteren van alle assets en ze correct plaatsen in de locatie is geslaagd. Het feit dat er een groot verschil bestaat in het aantal meet- of detectiepunten wekt wel het vermoeden dat het voornaamste probleem met dit scenario zal liggen in het detecteren van alle aanwezige assets, en niet zo zeer in het bekomen van een correcte lokalisatie.
+
+\subsubsection{Test 2: Realistische situatie}
+In tegenstelling tot vorige situatie is het natuurlijk geen gegeven dat alle asset tags zich ook op ruwweg dezelfde hoogte als de antenne zullen bevinden aangezien assets zelf zich in theorie overal in de kamer kunnen bevinden, inclusief op tafels of kasten. Deze test zal dus dezelfde opstelling nemen als de vorige test, maar de assets zullen zich ook op verschillende hoogtes bevinden.
+
+\paragraph{Resultaat}
+Dit resultaat toont de vrees van vorige test aan, de detectie is helaas veel slechter als de tags niet op het niveau van de antenne liggen. De volgorde is nog steeds correct, dus qua lokalisatie is er geen probleem. Echter is bij elke asset tag het aantal meet- of detectiepunten afgenomen en is de RSSI gezakt. Tag 5 is zelfs volledig verdwenen uit de data en is dus niet gedetecteerd.
+
+\includegraphics[width=\linewidth]{6b_RSSI}
+
+\paragraph{Testconclusie}
+Als de asset tags niet meer op hetzelfde niveau liggen als de antenne, is hun detectie dus veel minder. Dit hoeft echter niet zo'n zeer probleem te zijn aangezien 1 meetpunt in theorie voldoende is om te weten dat het asset aanwezig is, een tag die niet aanwezig is op de locatie zal uiteraard ook niet 1x antwoorden. Wel is het wegvallen van tags een probleem, want dan kan bijhorend asset niet gelokaliseerd worden, en deze kans wordt groter als de detectie verslecht.
+
+\subsubsection{Deelconclusie}
+Qua lokalisatie blijkt dit concept perfect te werken, echter is dit logisch gezien ook niet verrassend. Het voornaamste probleem is het kunnen detecteren van alle aanwezige tags, wat met een RFID opstelling niet vanzelfsprekend is. Uiteraard is het mogelijk om met een andere hardwareopstelling, bv. antennes op verschillende hoogtes, of een staafantenne met een ander bereikveld dan een vlakke antenne, mogelijk om betere detectie te bekomen. Echter evolueert dit op deze manier in een RFID detectieprobleem en komt daarmee buiten de scope, nl. lokalisatie, van dit onderzoek te liggen. Verder is er binnen Aucxis voldoende ervaring op dit veld dat verder onderzoek nutteloos zou zijn.
 
 \section{BLE}
 
