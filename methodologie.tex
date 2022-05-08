@@ -20,7 +20,7 @@ Voor de RFID opstellingen wordt gebruik gemaakt van KEONN Advantenna-p11 antenne
 Als tranceiver wordt een 4-port IMPINJ Speedway Revolution gebruikt, deze maakt het mogelijk om 4 antennes tegelijk aan te sluiten. De gebruikte tags zijn standaard RFID tags van ~9 x 1.5cm, met 1 antenne in 1 richting. Verder zenden de antennes een EM veld uit met Tx = 20dB. De resultaten van de test worden opgevangen en gevisualiseerd met ARTA.
 
 \section{BLE}
-In de BLE opstellingen wordt gebruik gemaakt van MIKROTIK Knot IoT Gateways, welke hun data over de waargenomen BLE beacons elke 30s zullen doorsturen via een MQTT queue naar een custom tussenprogramma, welke deze data zal exporteren naar een .xlsx bestand, waarna het kan geanalyseerd en gevisualiseerd worden. Als beacon worden er verschillende modellen MOKOSMART beacons gebruikt, welke zullen benoemd worden per experiment. Deze staan ingesteld op een Tx Power van -12dB, en sturen 1 bericht per seconde.
+In de BLE opstellingen wordt gebruik gemaakt van MIKROTIK Knot IoT Gateways, welke hun data over de waargenomen BLE beacons elke 30s (Statische opstellingen) of 2s (Dynamische opstellingen) zullen doorsturen via een MQTT queue naar een custom tussenprogramma. Deze data bevat per beacon het gemiddelde van de ontvangen RSSI waardes uit deze periode, alsook het aantal ontvangen berichten en de maximaal ontvangen RSSI waarde. Deze ontvangen data zal door het tussenprogramma worden geëxporteerd naar een .xlsx bestand, waarna het kan geanalyseerd en gevisualiseerd worden. Als beacon worden er verschillende modellen MOKOSMART beacons gebruikt, welke zullen benoemd worden per experiment. Deze staan ingesteld op een Tx Power van -12dB.
 
 
 

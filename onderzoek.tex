@@ -238,14 +238,243 @@ Qua lokalisatie blijkt dit concept perfect te werken, echter is dit logisch gezi
 
 \section{BLE}
 
+\subsection{Vooronderzoek}
+Voordat overgegaan kan worden naar het onderzoeken van de opstellingen die gebruik maken van BLE, is het nodig enkele testen te doen om het gedrag van BLE vast te stellen, en om enkele veronderstellingen te testen.
+
+\subsubsection{Test 1: Variatietest}
+Aangezien de lokalisatieopstellingen verder in dit hoofdstuk gebruik zullen maken van RSSI waardes om de locatie van de beacons, en dus ook de bijhorende assets, te bepalen, is het belangrijk dat deze waardes constant zijn in de tijd als alle andere variabelen constant zijn. 
+Voor deze test worden de gateway en de beacon op een afstand van 150cm uit elkaar gelegd, in hetzelfde vlak. Vervolgens wordt over lange tijd de RSSI waardes gemeten. Dit experiment wordt uitgevoerd bij 3 en bij 30 beaconberichten per gatewaybericht, dit om te bekijken of dit een effect heeft. Want logischerwijs zal ook deze verhouding een invloed hebben, nl. hoe meer berichten de gateway heeft ontvangen, hoe meer de eventuele extreme waarden zullen uitgemiddeld worden en hoe stabieler de waarden uitgestuurd door de gateway zullen worden.
+Beide experimenten zijn uitgevoerd met 5 verschillende beacons van het type MokoSmart H5, en 2 beacons van het type MokoSmart M2. Ze zijn allen aangeduid a.d.h.v. de laatste 2 karakters van hun MAC adres.
+
+\paragraph{a) 3 beaconberichten per gatewaybericht}
+Uit dit testresultaat is duidelijk af te lijden dat een uitmiddeling van 3 berichten een zeer grote variatie veroorzaakt in de RSSI waarden, met bij bv. beacon FB een verschil tussen de uitersten van 14 dBm. Aangezien de FSPL formule duidelijk maakt dat in theorie een verschil van 6 dBm een verdubbeling van de afstand betekend, komt deze onzekerheid neer op een afstandsverschil van ongeveer factor 4, het spreekt voor zich dat dit nefast is voor elke poging tot lokalisatie.
+
+\includegraphics[width=\linewidth]{sble_0_1a}
+
+\paragraph{b) 30 beaconberichten per gatewaybericht}
+Uit deze test is zichtbaar dat een uitmiddeling over 30 berichten veel minder variatie geeft, met over het algemeen een variatie van plus en min 1 van de gemiddelde waarde. Dit lijkt meer acceptabel. Ook is er in dit experiment 1 H5 beacon (code AD) vervangen door 2 beacons van het type H2. Dit om een vermoeden te onderzoeken dat, alhoewel alle beacons dezelfde instellingen hebben, hun zendsterkte toch varieert. Dit is hier ook bevestigd, deze 2 (6F en 23) hebben een hogere gemiddelde RSSI waarde dan de 4 overgebleven H5 beacons, welke onderling ook vrij veel van elkaar verschillen.
+
+\includegraphics[width=\linewidth]{sble_0_1b}
+
+\paragraph{Testconclusie}
+Uit deze eerste test zijn 2 dingen duidelijk geworden, allereerst dat er een goed aantal beaconberichten nodig is voor uitmiddeling per gatewaybericht, anders zijn er grote variaties in de RSSI waarden. Aan het versnellen van de beacons is echter ook een groot nadeel verbonden, namelijk het verminderen van de batterijduur. Deze factor is rechtstreeks verbonden aan kostprijs, voor de nieuwe batterij, en de werkuren om deze te vervangen. Ook zal het afhangen van de use-case hoe belangrijk deze is. Alternatief kan ook de gateway trager uitsturen, wat een negatief effect zal hebben op de lokalisatiesnelheid. Dit zal een afweging zijn gebaseerd op de situatie maar is zeker niet onbelangrijk. Tijdens het verdere verloop van dit onderzoek zal een (arbitraire) waarde van 30 beaconberichten per gatewaybericht worden aangehouden, aangezien dit een mooie middenweg lijkt, maar dit kan duidelijk verhoogd/verlaagd worden met de voor- en nadelen vandien.
+
+Als 2e is er ook duidelijk geworden dat er een verschil zit tussen de zendsterkte van BLE beacons met dezelfde instellingen. Dit zowel voor beacons van hetzelfde type, als van andere types. Hieruit volgt dus dat, als er een omzetting van RSSI waarde naar een afstand moet worden gemaakt, deze waarde op een of andere manier zal moeten worden genormaliseerd. Een mogelijkheid hiervoor is het veld 'RSSI at 0m', aanwezig in een UID bericht. Een andere optie is de beacons kalibreren dat ze even sterk zenden. Ongeacht hoe hier rond wordt gewerkt, blijft het een aandachtspunt.
+
+\subsubsection{Test 2: Afstandstest}
+De volgende veronderstelling die zal worden getest, is het verloop van de RSSI waardes, in functie van afstand tussen de beacons en de gateway. In theorie zou deze moeten verlopen volgens de FSPL formule (ongeveer exponentieel, met en neerwaarts traject van ~6dBm per verdubbeling van de afstand). Deze test heeft als doel na te gaan of dit in praktijk ook zo is.
+In dit experiment zal een gateway worden opgesteld, met een beacon die steeds verder van deze gateway zal verwijderd worden in intervallen van 50cm. Dit experiment zal 3x worden herhaald, 1x in een ideale omgeving, nl. een anechoïsche kamer\footnote{Een anechoïsche kamer is een kamer waarvan de muren bedekt zijn met speciaal gevormd mousse, meestal puntvormig. Dit is bedoeld om radio- en geluidsgolven zo goed mogelijk te absorberen en zo een kamer te creëren met zo weinig mogelijk reflecties.}, 1x in een open reële omgeving, nl. een bemeubelde huiskamer, en ditzelfde nogmaals, maar met 1 muur tussen, om zo het verwachte negatieve effect van obstakels te controleren. De meting in ideaal geval zal minder meetpunten bevatten dan de reële, omwille van de gelimiteerde grootte van de anechoïsche kamer.
+
+\subsubsection{Resultaat}
+Er is duidelijk zichtbaar dat theorie en realiteit veel van elkaar verschillen. De (beperkte) meetpunten van de ideale meting komen zeer goed in de buurt van de theorie, maar vanaf er wordt overgestapt naar een open reële ruimte zijn de resultaten zeer anders. Met als voornaamste bevindingen dat de waarden veel lager liggen dan in theorie, en dat het niet elke waarde dalend is. Wel is aan de bijgetekende logaritmische trendlijn te zijn dat de reële waarden wel een dalend verloop kennen. Verder zien we dat ook de meting met muur een grillig, maar neerwaarts verloop vertoon, op een lager niveau dan zonder muur.
+
+\includegraphics[width=\linewidth]{sble_0_2}
+
+\emph{De reële testen zijn uitgevoerd met 5 verschillende MokoSmart H5 beacons, echter aangezien allen een gelijkaardig verloop vertoonden, worden de andere 4 niet extra bijgevoegd.}
+
+\paragraph{Testconclusie}
+Aangezien het voornaamste verschil tussen de ideale en realistische situatie het bestaan van reflecties is, is met deze test dus duidelijk geworden dat deze een zeer grote impact kunnen hebben op de resultaten en de RSSI waarden. Voornamelijk in de vorm van een schommeling, welke vervelend is als er een conversie moet worden gemaakt tussen RSSI en afstand, en verder ook in een algehele RSSI vermindering tegenover de theorie. 
+De testen voor de effectieve scenario's zullen allen plaatsvinden in reële omgevingen, aangezien implementaties van systemen gebaseerd op deze scenario's ook in reële ruimtes zullen werken, en puur theoretische of ideale situaties dus geen nut hebben om te vergelijken.
+
+\subsubsection{Test 3: Rotatietest}
+Deze derde en laatste test in dit vooronderzoek zal de veronderstelling testen dat de meting van de gateway richtingsonafhankelijk is, nl. of er een verschil is in RSSI als de enige variabele de locatie van de beacon rond de gateway is.
+Voor deze test is een gateway opgesteld op een draaiplatform in een anechoïsche kamer, met een MokoSmart H5 beacon op 150cm afstand. Tijdens te test zal de gateway rond zijn as draaien. Dit gebeurt 2x, eens met de beacon op dezelfde hoogte als de gateway, en eens met de beacon 50cm hoger.
+
+\paragraph{a) Beacon en gateway op zelfde hoogte}
+
+\begin{minipage}{0.55\textwidth}
+Uit dit resultaat is zeker duidelijk dat er een zekere richtingsafhankelijk is, met een grote blindspot rond 260° van -68 dBm, een verschil met het gemiddelde van 10dBm, met 2 kleinere op 80° en 180° met een verschil van 5 dBm. Alhoewel niet drastisch, het overgrote deel van is vrij constant, is dit toch noemenswaardig. De meest voor de hand liggende verklaring hiervoor is het feit dat de ingebouwde (staaf) antenne loopt op de lijn van 90° en 270°, dus de 2 voornaamste dippen wijzen ongeveer naar de uiteinden van deze antenne, en een blindspot hier is karakteristiek voor een staafantenne.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_0_3a}
+\end{minipage}
+
+
+\paragraph{b) Beacon 50cm boven gateway}
+
+\begin{minipage}{0.55\textwidth}
+Hier is zichtbaar dat de harde blindspots uit de vorige test verdwenen zijn, wat het vermoeden dat dit met de antennerichting te maken heeft lijkt te bevestigen. Wel is er nog een duidelijk dal in het kwartaal tussen 225° en 315°.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_0_3b}
+\end{minipage}
+
+\paragraph{Testconclusie}
+Uit deze test is duidelijk geworden dat een gateway niet 100\% richtingsonafhankelijk is. Over de grote lijn zal dit vermoedelijk geen problemen geven, echter kunnen de plotse daten in meetgevoeligheid onverwachte waarden opleveren als een beacon toevallig net in die richting ligt.
+Tijdens de volgende testen zullen alle gateways in dezelfde richting worden geplaatst om het effect van deze verlopen te standaardiseren. 
+
+\subsubsection{Deelconclusie}
+Uit dit vooronderzoek is duidelijk geworden dat niet elke theoretische veronderstelling ook geldig is in een reële praktijk. Het is belangrijk dit eerst vastgesteld te hebben, aangezien het waarschijnlijk mogelijk zal zijn om sommige anders onverklaarbare fenomenen in komende scenariotests te verklaren. Ook zijn er in de testconclusies maatregelen/standaarden vastgelegd om deze effecten zo veel mogelijk te standaardiseren.
+
 \subsection{1 gateway per locatie}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling zal een asset kunnen lokaliseren, genomen dat de gekozen locaties een gelijkaardige grootte hebben.
+
+\subsubsection{Test 1: 6 locaties in reële, open ruimte, gelijk verdeeld}
+\begin{minipage}{0.55\textwidth}
+De eerste test voor deze opstelling bestaat uit de eenvoudigste en best case opstelling. In een open ruimte zijn, in een raster, 6 gateways\footnotemark geplaatst, op een afstand van 2m uit elkaar. Dan is de ruimte in 6 locaties verdeeld, volgens de afstand van de beacons. Een punt behoort dus tot de locatie van de dichtstbijliggende gateway. In praktijk komt deze locatieafscheiding\footnotemark neer op een raster middendoor de gateways. Verder worden er verschillende MokoSmart H5 en M2 beacons verdeeld over de ruimte, en zal worden bekeken waar zij volgens de gemeten waarden zich bevinden, en zal dit worden vergeleken met hun echte positie.
+\end{minipage}
+\footnotetext{Gateways worden aangeduid door een grijs blokje met een bijhorende letter. De illustratie is ook voorzien van 2 rode stippen op de gateway, deze illustreren de voorkant (0°) van de gateway.}
+\footnotetext{De grenzen van locaties worden in de illustraties aangegeven door een stippellijn.}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_1_1_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.55\textwidth}
+De resultaten van deze test zijn zichtbaar in bijhorende tabel. De laagste waarden per beacon staan aangeduid in het groen, en het is meteen duidelijk dat deze toewijzing over het algemeen goed is verlopen. Ook grensgeval beacons zijn toegewezen aan 1 van hun aangrenzende locaties. Enkel bij beacon 6 en 8 is een verschil te vinden.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_1_1_results}
+\end{minipage}
+
+We hebben een onderscheid in soorten beacons die even apart horen besproken te worden, in volgorde van moeilijkheid. Allereerst hebben we beacons die duidelijk in een locatie liggen, niet tussen 2 beacons. Tijdens deze test zijn dit beacon 4 en 5. Deze zijn beiden met een comfortabel RSSI verschil gecategoriseerd in de juiste locatie. Verder hebben we de beacons duidelijk in een locatie, maar tussen verschillende gateways. Dit zijn beacons 1 en 8. Hoewel beacon 1 met voorsprong correct is, is er iets vreemd gebeurd bij beacon 8, welke gecategoriseerd wordt bij gateway F, van een zelfs niet aangrenzende locatie.  Dit is zeer vreemd aangezien deze zeer dicht bij gateway B lag, maar als we dit vergelijken met het meetpatroon van de gateway zien we dat deze toevallig net in een blindspot lijkt te liggen, wat een mogelijke verklaring zou kunnen zijn. Verder zijn er de grensgeval beacons, waaronder beacon 2 en 7, welke op de grens tussen 2 locaties liggen. Zij zijn echter toegewezen aan 1 van deze 2, welke in orde is, aangezien het in dit scenario niet de bedoeling is om een exacte positie te bepalen, maar toewijzing aan een locatie te doen. En als laatste beacon 3 en 6 op een 4-punt. Beacon 3 is ook aangrenzend toegewezen dus ook in orde. Beacon 6, alhoewel fysiek net over de grens van locatie E liggend, is toegewezen aan aangrenzende locatie F. In theorie is dit dus een fout, maar geen grote. Ook is een zekere foutmarge bij de locatiegrenzen geen verassing, gezien de onzekerheden in de RSSI waarden vastgesteld in het vooronderzoek.
+
+\paragraph{Testconclusie}
+De eerste test heeft bewezen dat dit lokalisatiescenario mogelijkheden heeft, op zijn minst in een eenvoudige egale opstelling. Een toewijzingsscore van 6.5/8 is ook zeker acceptabel.
+
+\subsubsection{Test 2: 6 even grootte in reële, open ruimte, ongelijk verdeeld}
+\begin{minipage}{0.55\textwidth}
+Deze test verandert de locaties van gelijke grootte uit vorige test in locaties van variabele grootte en vorm. Verder is de ruimte, hoewel nog steeds open, niet meet convex. De locaties blijven dit wel. Hier is het dus niet zo dat elk punt zich ook bij zijn dichtstbijzijnde gateway bevind qua locatie.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_1_3_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.55\textwidth}
+De resultaten van deze test zijn zichtbaar in bijgevoegde tabel. We zien dat van de 6 beacons er 3 goed en 3 slecht zijn toegewezen. Echter zijn de 3 slecht toegewezen beacons (1, 3 en 5) de beacons die dichter lagen bij de toegewezen locatie gateway dan bij de theoretisch correcte locatie gateway. De andere 3 beacons (2, 4 en 6) zijn wel correct toegewezen. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_1_3_results}
+\end{minipage}
+
+\paragraph{Testconclusie}
+Deze test bevestigd het vermoeden dat deze lokalisatie strategie het slechter zal doen bij locaties van verschillende groottes, door de basering op RSSI en afstand, en dit zeker in een open ruimte waar deze afstand de enige bepalende factor voor de RSSI is (uiteraard buiten de onzekerheden vastgesteld tijdens het BLE vooronderzoek). Een mogelijke remedie hiervoor is ee RSSI filter te plaatsen op gateways voor kleinere locaties, zodat het gebied dat ze (stelen) van aanpalende grotere ruimtes verminderd. Echter omdat het bereik nog steeds (theoretisch) een cirkel blijft zullen vreemde verschijnsels bij locatieovergangen onvermijdelijk blijven.
+
+\subsubsection{Test 3: 5 realistische locaties}
+\begin{minipage}{0.55\textwidth}
+Deze derde een laatste test vergroot het concept vn vorige test en voegt muren toe zodat de opstelling realistischer wordt. Deze opstelling bestaat uit 5 locaties, ondergebracht in 5 ruimtes van verschillende groottes, gescheiden door muren. Hier is dus afstand niet meer de enige bepalende factor voor de RSSI, maar ook tussenliggende muren. Wat in theorie een groter verschil zou moeten geven, en het grootteverschil tussen locaties wat zou kunnen compenseren. Dit experiment zal ook 2x worden uitgevoerd, 1x met tussenliggende deuren gesloten, en 1x open, om ook het mogelijke effect van deuren vast te stellen.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_1_4_floor}
+\end{minipage}
+
+\paragraph{a) Deuren gesloten}
+\begin{minipage}{0.55\textwidth}
+Uit de resultaten is af te leiden dat dit principe zeer goed werkt, met een perfecte lokalisatie. Dit is geen verassing voor da duidelijke, safe beacons (4 en 5). Maar de andere 4 beacons liggen stuk voor stuk in een locatie maar dichter bij een andere gateway (weliswaar met een muur tussen). Met in het bijzonder beacon 2, welke op ong 50cm (+muur) ligt van gateway E, en op 250cm van gateway D, maar nog steeds correct bij locatie D wordt gecategoriseerd.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_1_4a_results}
+\end{minipage}
+
+\paragraph{b) Deuren open}
+\begin{minipage}{0.55\textwidth}
+Deze resultaten tonen geen noemenswaardig verschil met de test met gesloten deuren. Alles blijft correct gecategoriseerd, maar ook de waardes verschillen niet veel. Dit is vooral verrassend bij beacon 1, welke met open deur rechtstreeks zichtbaar is voor gateway A, maar toch correct bij gateway D blijft ingedeeld.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_1_4b_results}
+\end{minipage}
+\paragraph{Testconclusie}
+Deze test toont mooi aan dat de extra isolatie van een muur een positieve invloed heeft op lokalisatie volgens dit principe, en dat een verschil in grote tussen aanpalende ruimtes niet noodzakelijk een groot probleem hoeft te zijn. Uiteraard zal ook het soort muur een invloed hebben op deze resultaten. In de testopstelling worden muren uit cellenbeton gebruikt, maar een dunnere muur uit bv. kalkplaat zal mogelijk een minder isolerend effect hebben. Ook is duidelijk dat een deur weinig impact heeft op de resultaten. Ook dit kan natuurlijk aan het materiaal liggen. Een houten deur zoals in de testopstelling is klaarblijkelijk verwaarloosbaar, maar bv. een nooddeur, speciaal als er metaal in zit, zal een grotere impact hebben.
+
+\subsubsection{Deelconclusie}
+Al bij al is dit een zeer acceptabel scenario, het merendeel van de lokalisaties was geslaagd, met uitzondering van fouten aan de locatieovergang in een open ruimte, maar dat is geen verassing na de vaststellingen in het vooronderzoek. Ook bestaat er de mogelijkheid tot toevallige mislokalisaties door hardware effecten, maar dit ligt niet zozeer aan het scenario zelf. De hypothese is bevestigd.
 
 \subsection{Meerdere gateways per locatie}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling slaagt er in om met een BLE beacon getagde assets correct te lokaliseren.
+
+\subsubsection{Test 1: 2 rechthoekige locaties in reële, open ruimte}
+\begin{minipage}{0.55\textwidth}
+De testopstelling voor deze eerste test bestaat uit een raster van 6 gateways (analoog aan de opstelling bij het vorige scenario, test 1). De locatiedefinitie is in dit geval in de vakken tussen de gateways, om 2 even grote locaties te creëren. Het idee is dat zichtbaar is aan de meetwaarden in welk vak een beacon ligt, en dus zo een locatie toegewezen krijgt. Meer specifiek aan de laagste som van RSSI's van de gateways in de hoekpunten. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_2_1_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+Bijhorende resultaten zijn verrassend goed, met voor elke van de 8 beacons een correcte lokalisatie. Enkele interessante randgevallen zijn beacon 3 en 6, welke op de grens tussen de 2 locaties liggen. Bij beide zijn de cijfers duidelijk voor de rechtse locatie, nochtans zou men verwachten dat deze cijfers dichter bijeen zouden liggen. Verder is er ook beacon 4, welke op geen enkele locatie ligt en is ingedeeld bij de rechtse locatie. Deze indeling is uiteindelijk de correcte, aangezien dit de dichtstbijzijnde locatie betreft en er geen 'geen locatie' mogelijk is in dit experiment. 
+
+\includegraphics[width=\linewidth]{sble_2_1_results}
+
+\paragraph{Testconclusie}
+Deze opstelling heeft in deze eerste test een perfecte lokalisatie gedaan, en is daarmee voorlopig zeer goed. Echter is er het detail van de 'geen locatie' beacons, maar dit is in elk scenario een ding. Hier is dit in theorie oplosbaar aangezien er een bepaalbare bovengrens in som van RSSI's wil de beacon nog tussen de gateways liggen. Deze is ook theoretisch berekenbaar gegeven de afstand tussen de gateways, de FSPL formule en enige meetkundige kennis, maar gezien het vastgestelde verschil tussen theorie en praktijk tijdens het vooronderzoek lijkt dit eerder een maximum dat moet worden gemeten/bepaald.
+
+\subsubsection{Test 2: 2 rechthoekige locaties gescheiden door muur}
+\begin{minipage}{0.55\textwidth}
+De opstelling voor deze test is analoog an de vorige, het enige verschil is dat er een muur is verschenen tussen de 2 locaties. Dit zal in praktijk ook meer het geval zijn, nl. 2 aanpalende lokalen. Het doel van deze test is om het effect van deze muur op de cijfers te bekijken.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_2_2_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+In deze 2e test is dit scenario er ook weer in geslaagd elke beacon correct te lokaliseren. Hier is wel een extra stap bij de verwerking gekomen. Door het toevoegen van de muur wordt niet elke beacon door elke gateway meer opgevangen. Hierdoor verschijnen er rode platte streepjes in de tabel. Het spreekt voor zich dat dit ook meteen diskwalificerend werkt voor de locatie(s) waarvan deze gateway een hoekpunt is aangezien de beacon niet tussen deze gateways zal liggen als er 1 van deze gateways de beacon niet eens ziet.
+\includegraphics[width=\linewidth]{sble_2_2_results}
+
+\paragraph{Testconclusie}
+Op het eerste zicht lijkt deze test volledig geslaagd, het toevoegen van een muur zorgt er niet voor dat dit scenario slechter presteert. Echter is er wel een belangrijk detail dat aangehaald moet worden. Als de cijfers beter onderzocht worden blijkt het volgende: bij elke beacon is de gateway die hem met de hoogste RSSI waarneemt een gateway die in dezelfde ruimte ligt als de beacon. Met andere woorden dezelfde uitkomst kan bekomen worden met 1 gateway per ruimte, en zo wordt de opstelling vereenvoudigd tot het vorige scenario, waarvoor minder gateways nodig zijn.
+
+\subsubsection{Deelconclusie}
+Dit scenario blijkt zeer effectief te zijn en heeft alle geteste beacons perfect gelokaliseerd. Echter blijkt wel dat deze opstelling geen voordelen heeft over de vorige (1 gateway / locatie) als een locatie 1 ommuurde ruimte is, maar wel meer hardware vereist. Hiervoor is het dus niet geschikt. Voor lokalisatie in een open ruimte echter, lijkt ze beter te werken, voor een hogere hardware kost. De deelhypothese is bevestigd.
 
 \subsection{Gateways in rasteropstelling}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling slaagt er in om met een BLE beacon getagde assets een positie te geven binnen het raster zodat het eenduidig met een locatie kan worden gelinkt.
+
+\subsubsection{Test 1: Raster in open, reële ruimte}
+\begin{minipage}{0.55\textwidth}
+De opstelling voor deze test is idem aan het vorige scenario, test 1. Aangezien bij die test ook beacons in een raster gemeten zijn, kon de data uit die test hier hergebruikt worden en worden verwerkt met trilateratie. Voordat trilateratie kan toegepast worden, moet er eerst een omzetting gebeuren tussen de RSSI waarde en de afstand. Dit kan door de FSPL formule te gebruiken (weliswaar omgekeerd). Aangezien bij de verwerking van de resultaten bleek dat dit niet geheel correct was is nog een offset in dBm toegevoegd, verschillend per soort beacon. Dit om het, bij het vooronderzoek vastgelegde fenomeen dat beacons, hoewel ze de zelfde instellingen hebben, niet allen een even sterk signaal sturen. Bij de verwerking is een waarde gebruikt van -16 dB voor de gebruikte H5 beacons, en -10 dB voor de M2 beacons. Deze waardes zijn experimenteel vastgelegd, en vloeien voort uit de data van de afstandstest bij het vooronderzoek, waar de offset van de trendlijn tegenover de theoretische curve is gebruikt.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_3_1_floor}
+\end{minipage}
+
+De resultaten van de trilateratie worden geplot op bovenstaand grondplan. De zwarte cijfers zijn de effectieve locaties van de beacons, de gekleurde zijn de berekende locaties a.d.h.v. de resultaten en trilateratie, met de groene een geslaagde trilateratie, en een rode een mislukte. Een mislukte wilt zeggen dat trilateratie niet mogelijk is door te korte afstanden (bv. de afstand tussen beacon 6 en gateway E en F bedraagt resp. 0.87m en 0.62m, dus opgeteld 1.49m. Dit is onmogelijk aangezien de afstand tussen deze beacons 2m bedraagt). Bij een situatie zoals dit is de beacon geplaatst tussen de 2 gateways.
+
+\paragraph{Resultaat}
+Om het resultaat te berekenen zijn de 2 gateways met de beste RSSI gebruikt. Meteen is zichtbaar dat het resultaat vrij catastrofaal is en dat de uitkomst van de trilateratie de beacons precies random plaatst. Beacon 5 komt in de buurt, maar deze lag fysiek aan gateway 5, waardoor zijn RSSI zeer hoog was (-28 dBm), hierdoor werd deze door de noodoplossing van het algoritme toch ietwat in de buurt geplaatst maar dit is een unicum. Verder is enkel beacon 2 relatief ok geplaatst.
+
+\paragraph{Testconclusie}
+Het is duidelijk dat trilateratie op basis van RSSI zeer onnauwkeurig is. Dit ligt vooral aan het onnauwkeurig omzetten van RSSI waardes in afstanden door de grote onzekerheden op RSSI waardes. Deze eerste test belooft zeker niet veel goeds voor dit concept.
+
+\subsubsection{Test 2: Raster in verspreid over gebouw met muren}
+\begin{minipage}{0.55\textwidth}
+In deze 2e test is het raster vergroot, van 2m maar 3.5m tussen gateways. Ook is het raster verspreid over een gebouw, met muren tussen.
+De methodieken voor berekening en de kleurcodes voor het visualiseren van de resultaten zijn gelijk gebleven aan vorige test.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_3_2_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.55\textwidth}
+Na deze test zijn er slechts 2 beacons die met succes kunnen getrilatereerd worden zonder de noodoplossing te gebruiken (groen). Deze 2 beacons (4 en 6) zijn ook enkel opgemerkt door de 2 gateways waar ze tussen liggen. De 4 andere beacons zijn zeer slecht geplaatst in vergelijking met hun effectieve positie.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{sble_3_2_results}
+\end{minipage}
+
+\paragraph{Testconclusie}
+Deze grotere test heeft weer aangetoond wat na vorige test al duidelijk was, trilateratie op basis van RSSI is onnauwkeurig. En het toevoegen van muren, waardoor niet elke geteway meer elke beacon ziet, heeft de nauwkeurigheid enkel verslecht.
+
+\subsubsection{Deelconclusie}
+Na deze 2 tests kan duidelijk worden besloten dat dit scenario niet haalbaar is met de gebruikte BLE hardware. In het principe zit potentieel, maar enkel als er een goeie, precieze conversie kan worden gemaakt tussen RSSI waardes en afstanden. De deelhypothese is hierbij dus ontkracht.
 
 \subsection{1 beacon per locatie, midden van locatie}
 %TODO
@@ -257,7 +486,8 @@ Qua lokalisatie blijkt dit concept perfect te werken, echter is dit logisch gezi
 %TODO
 
 \subsection{Beacons in rasteropstelling}
-%TODO
+\subsubsection{Deelconclusie}
+Na de zeer slechte testresultaten van de statische versie van dit scenario, en omdat dit scenario zich qua principe berust op dubbele trilateratie, waardoor de extreme onnauwkeurigheden bij enkele trilateratie enkel maar extremer zullen worden, is besloten dit scenario in te delen in dezelfde categorie.
 
 \subsection{Beacons op intervallen in de gang}
 %TODO

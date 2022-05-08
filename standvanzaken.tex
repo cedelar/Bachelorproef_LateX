@@ -15,6 +15,18 @@ IoT, of voluit Internet Of Things, is een systeem van samenwerkende devices die 
 \subsubsection{MQTT}
 MQTT, of voluit Message Queuing Telemetry Transport, is een protocol voor het versturen van berichten gemaakt door IoT devices over het internet. Belangrijke voordelen van het protocol zijn dat het licht en efficiënt is, en gemakkelijk schaalbaar naar grote hoeveelheden devices.\autocite{MQTT2022}
 
+\subsubsection{FSPL}
+FSPL, of voluit Free Space Path Loss, is het theoretische verlies in signaalsterkte over een bepaalde afstand in open ruimte. Deze kan berekend worden, gegeven de afstand tussen de 2 antennes (d), de frequentie van de EM golf (f), en de gain op de zendende en ontvangende antenne (Gz en Go respectievelijk). Ze wordt berekend via onderstaande formule: 
+\[FSPL = 20\log_{10}(d) + 20\log_{10}(f) + 20\log_{10}(\frac{4\pi}{c}) - G_z - G_o \]
+\autocite{Pasternack2020}
+
+\subsubsection{Trilateratie}
+Trilateratie is de berekening voor de bepaling van de coördinaten van een punt uit 2 geweten punten, en de afstanden van die punten tot het te berekenen punt. Hierbij blijft ook een zogenaamd 'dubbelzinnig punt' over, welk logisch moet worden uitgebrand. De formules voor berekening zijn als volgt:
+ \[x = \frac{d_1^2 - d_2^2 + (x_2 - x_1)}{2(x_2 - x_1)} + x_1\]
+ \[y = \sqrt{d_1^2 - x^2} \pm y_1\]
+ Met \((x,  y)\) de coördinaten van het onbekende punt,  \((x_1, y_1)\) en \((x_2, y_1)\) de coördinaten van de geweten punten en \(d_1\) en \(d_2\) de bekende afstanden.
+ \autocite{TRM2022}
+
 \section{Hardware}
 \label{sec:Hardware}
 Deze sectie zal de gebruikte hardwaretechnologieën toelichten, deze zijn RFID en BLE.
