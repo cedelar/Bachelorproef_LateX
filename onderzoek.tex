@@ -236,9 +236,7 @@ Als de asset tags niet meer op hetzelfde niveau liggen als de antenne, is hun de
 \subsubsection{Deelconclusie}
 Qua lokalisatie blijkt dit concept perfect te werken, echter is dit logisch gezien ook niet verrassend. Het voornaamste probleem is het kunnen detecteren van alle aanwezige tags, wat met een RFID opstelling niet vanzelfsprekend is. Uiteraard is het mogelijk om met een andere hardwareopstelling, bv. antennes op verschillende hoogtes, of een staafantenne met een ander bereikveld dan een vlakke antenne, mogelijk om betere detectie te bekomen. Echter evolueert dit op deze manier in een RFID detectieprobleem en komt daarmee buiten de scope, nl. lokalisatie, van dit onderzoek te liggen. Verder is er binnen Aucxis voldoende ervaring op dit veld dat verder onderzoek nutteloos zou zijn.
 
-\section{BLE}
-
-\subsection{Vooronderzoek}
+\section{BLE Vooronderzoek}
 Voordat overgegaan kan worden naar het onderzoeken van de opstellingen die gebruik maken van BLE, is het nodig enkele testen te doen om het gedrag van BLE vast te stellen, en om enkele veronderstellingen te testen.
 
 \subsubsection{Test 1: Variatietest}
@@ -308,6 +306,7 @@ Tijdens de volgende testen zullen alle gateways in dezelfde richting worden gepl
 \subsubsection{Deelconclusie}
 Uit dit vooronderzoek is duidelijk geworden dat niet elke theoretische veronderstelling ook geldig is in een reële praktijk. Het is belangrijk dit eerst vastgesteld te hebben, aangezien het waarschijnlijk mogelijk zal zijn om sommige anders onverklaarbare fenomenen in komende scenariotests te verklaren. Ook zijn er in de testconclusies maatregelen/standaarden vastgelegd om deze effecten zo veel mogelijk te standaardiseren.
 
+\section{Statische BLE}
 \subsection{1 gateway per locatie}
 \subsubsection{Deelhypothese}
 Deze opstelling zal een asset kunnen lokaliseren, genomen dat de gekozen locaties een gelijkaardige grootte hebben.
@@ -436,7 +435,7 @@ Deze opstelling slaagt er in om met een BLE beacon getagde assets een positie te
 
 \subsubsection{Test 1: Raster in open, reële ruimte}
 \begin{minipage}{0.55\textwidth}
-De opstelling voor deze test is idem aan het vorige scenario, test 1. Aangezien bij die test ook beacons in een raster gemeten zijn, kon de data uit die test hier hergebruikt worden en worden verwerkt met trilateratie. Voordat trilateratie kan toegepast worden, moet er eerst een omzetting gebeuren tussen de RSSI waarde en de afstand. Dit kan door de FSPL formule te gebruiken (weliswaar omgekeerd). Aangezien bij de verwerking van de resultaten bleek dat dit niet geheel correct was is nog een offset in dBm toegevoegd, verschillend per soort beacon. Dit om het, bij het vooronderzoek vastgelegde fenomeen dat beacons, hoewel ze de zelfde instellingen hebben, niet allen een even sterk signaal sturen. Bij de verwerking is een waarde gebruikt van -16 dB voor de gebruikte H5 beacons, en -10 dB voor de M2 beacons. Deze waardes zijn experimenteel vastgelegd, en vloeien voort uit de data van de afstandstest bij het vooronderzoek, waar de offset van de trendlijn tegenover de theoretische curve is gebruikt.
+De opstelling voor deze test is idem aan het vorige scenario, test 1. Aangezien bij die test ook beacons in een raster gemeten zijn, kon de data uit die test hier hergebruikt worden en worden verwerkt met trilateratie. Voordat trilateratie kan toegepast worden, moet er eerst een omzetting gebeuren tussen de RSSI waarde en de afstand. Dit kan door de FSPL formule te gebruiken (weliswaar omgekeerd). Aangezien bij de verwerking van de resultaten bleek dat dit niet geheel correct was is nog een offset in dBm toegevoegd, verschillend per soort beacon. Dit om het bij het vooronderzoek vastgelegde fenomeen dat beacons, hoewel ze de zelfde instellingen hebben, niet allen een even sterk signaal sturen. Bij de verwerking is een waarde gebruikt van -16 dB voor de gebruikte H5 beacons, en -10 dB voor de M2 beacons. Deze waardes zijn experimenteel vastgelegd, en vloeien voort uit de data van de afstandstest bij het vooronderzoek, waar de offset van de trendlijn tegenover de theoretische curve is gebruikt.
 \end{minipage}
 \hfill
 \begin{minipage}{0.42\textwidth}
@@ -451,7 +450,7 @@ Om het resultaat te berekenen zijn de 2 gateways met de beste RSSI gebruikt. Met
 \paragraph{Testconclusie}
 Het is duidelijk dat trilateratie op basis van RSSI zeer onnauwkeurig is. Dit ligt vooral aan het onnauwkeurig omzetten van RSSI waardes in afstanden door de grote onzekerheden op RSSI waardes. Deze eerste test belooft zeker niet veel goeds voor dit concept.
 
-\subsubsection{Test 2: Raster in verspreid over gebouw met muren}
+\subsubsection{Test 2: Raster verspreid over gebouw met muren}
 \begin{minipage}{0.55\textwidth}
 In deze 2e test is het raster vergroot, van 2m maar 3.5m tussen gateways. Ook is het raster verspreid over een gebouw, met muren tussen.
 De methodieken voor berekening en de kleurcodes voor het visualiseren van de resultaten zijn gelijk gebleven aan vorige test.
@@ -476,18 +475,218 @@ Deze grotere test heeft weer aangetoond wat na vorige test al duidelijk was, tri
 \subsubsection{Deelconclusie}
 Na deze 2 tests kan duidelijk worden besloten dat dit scenario niet haalbaar is met de gebruikte BLE hardware. In het principe zit potentieel, maar enkel als er een goeie, precieze conversie kan worden gemaakt tussen RSSI waardes en afstanden. De deelhypothese is hierbij dus ontkracht.
 
+\section{Dynamische BLE}
+In tegenstelling tot bij statische BLE opstellingen, is de variabele 'tijd' wel belangrijk bij dynamische BLE opstellingen. Daarom is het essentieel dat de tijd tussen de berichten, ontvangen van de gateway, vrij kort is. Een tussenperiode van 30s is hierbij niet wenselijk, aangezien de gateway zich zeer ver kan verplaatsten op deze tijdsspanne en de metingen dus vrijwel nutteloos zullen zijn. Vandaar dat de instellingen van zowel de beacons als de gateway zullen worden versneld tijdens volgende testen. De gateway zal elke seconde zijn gemeten informatie doorsturen. Verder is het bij deze snelheden niet meer mogelijk om een beacon zendsnelheid van 30 berichten per gatewaybericht aan te houden aangezien de maximale snelheid 10 berichten/seconde bedraagt. Deze maximumsnelheid zal ook worden gebruikt tijdens volgende testen.
+
 \subsection{1 beacon per locatie, midden van locatie}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling slaagt er in om met een BLE beacon getagde assets correct te lokaliseren.
+
+\subsubsection{Test 1: 3 even grote locaties in open reële ruimte}
+\begin{minipage}{0.55\textwidth}
+Voor deze test is een open ruimte opgedeeld in een gang en 3 locaties, liggende naast elkaar en langs 1 kant van deze gang. Deze locaties zijn even groot, en voorzien van een locatiebeacon (MokoSmart H5) in hun middelpunt, met een onderlinge afstand van 200cm. Tijdens de test wordt een gateway aan een constante snelheid verplaatst, aangegeven door de pijl op de illustratie. De test duurt 20sec, en op deze tijd heeft de gateway de volledige breedte van de opstelling overbrugd. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_1_1_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+In bijgevoegde tabel zijn de resultaten van deze test zichtbaar. Elke kolom stelt een beacon voor, opgedeeld volgens locatie- en assetbeacons. Voor elke beacon is zijn maximale RSSI waarde aangeduid in groen. Dit punt komt overeen met het moment dat de gateway deze beacon het dichtste nadert en komt dus overeen met het moment dat de gateway de beacon voorbij komt. Hieruit kan afgeleid worden welke beacons in elkaars buurt liggen. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_1_1_results}
+\end{minipage}
+
+De toewijzing van assetbeacons aan een locatie gebeurt volgens kleinste tijdverschil (een assetbeacon wordt toegewezen aan de locatie waarbij het tijdsverschil tussen zichzelf en de locatiebeacon van die locatie het kleinste is). In bijgevoegde resultatentabel is een onderbroken lijn geplaatst die deze toewijzingen weergeeft.
+Vervolgens is uit deze resultaten te concluderen dat deze manier van lokaliseren verrassend goed werkt aangezien elk asset aan de correcte locatie is toegewezen. Beacon 4 en 5 bevinden zich op de grens tussen 2 locaties, en dit is ook zichtbaar aan de resultaten, aangezien hun maximale RSSI dicht bij een overgangslijn valt. Als louter wordt gekeken naar de volgorde zijn er hier en daar enkele onnauwkeurigheden, zoals bv. bij beacons 4 en 9, maar dit verschil is eerder beperkt en verwaarloosbaar als er enkel interesse bestaat voor een locatietoewijzing.
+
+\paragraph{Testconclusie}
+Deze eerste test is veelbelovend. Met een zeer eenvoudig lokalisatiealgoritme, gebaseerd op de maximale RSSI waarde, kan een zeer accurate lokalisatie bekomen worden. Wel is het zo dat deze hoogste waardes bij de locatiebeacons vrij dicht bij elkaar liggen, dit vermoedelijk omdat deze beacons dieper in de ruimte liggen en het relatieve afstandsverschil tussen de gateway en de locatiebeacons niet zeer uitgesproken is. Dit zou kunnen vergroot worden door deze beacons dichter naar het gangpad te brengen, of door de gateway nog sneller te laten sturen.
+
+\subsubsection{Test 2: gang omringd door 4 locaties van variabele grootte}
+\begin{minipage}{0.55\textwidth}
+Deze test maakt gebruik van 4 locaties in verschillende groottes, gescheiden door muren, om zo een realistische gang te bekomen. Verder bevinden deze locaties zich langs beide zijden van de gang. Voor de rest is deze opstelling analoog aan test 1.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_1_2_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+Bijgevoegde tabel toont de resultaten van deze test, volgens dezelfde regels en opbouw als in test 1. Als eerste valt op dat hier slechts 1 scheidingslijn aanwezig is. Dit is bewust. Bij deze test is het zo dat er locaties aanwezig zijn langs beide kanten van de gang, op ongeveer dezelfde hoogte. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_1_2_results}
+\end{minipage}
+
+Met 1 MikroTik KNOT gateway is het niet mogelijk richting (links of rechts) te detecteren dus worden deze 2 locaties samengesmolten. Na de vereenvoudiging door deze hardware limitatie blijven er 2 locaties over. De toewijzing van de assets aan deze 2 locaties is echter wel weer perfect gebeurd, en ook de volgorde zit nagenoeg correct.
+
+\paragraph{Testconclusie}
+Na deze 2e realistischere test, met toevoeging van muren, is er zichtbaar aan de resultaten dat de lokalisatie even goed (perfect) gebeurt als in de eenvoudigere opstelling van test 1. Wel is het duidelijk dat een links/rechts opdeling handig zou zijn voor een bruikbaarder algoritme, maar dit is enkel hardwarematig op te lossen. Bijvoorbeeld door het gebruik van 2 vlakke antennes, 1 naar rechts en 1 naar links gericht. Dit kan echter gesimuleerd worden door de resultaten op te delen in 2 (1 per richting), en het is duidelijk dat de resultaten in dat geval ook in orde zijn.
+
+\subsubsection{Deelconclusie}
+Uit deze testen is af te leiden dat dit principe van opstelling zeer goed werkt, zowel in een open ruimte als met de toevoeging van muren. De deelhypothese is aangenomen.
+	
 
 \subsection{1 beacon per locatie, aan deur}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling slaagt er in om met een BLE beacon getagde assets correct te lokaliseren, en de detectie van de locatiebeacon zal beter zijn dan in het geval dat deze dieper weg zit in de ruimte.
+
+\subsubsection{Test 1: 3 even grote locaties in open ruimte}
+\begin{minipage}{0.55\textwidth}
+De opstelling voor deze test is analoog aan de opstelling voor het vorige scenario, test 1. Als enige verschil zijn de locatiebeacons verplaatst naar de grens tussen de locaties en de gang.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_2_1_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+De resultaten in bijgevoegde tabel zijn zeer analoog aan deze bij test 1 van het vorige scenario. Met als enige verschil dat de locatiebeacons verder uit elkaar liggen in de tijd. Verder worden alle assets wederom correct gecategoriseerd per locatie, met een onderlinge volgorde van maximale RSSI waardes die ruwweg overeenkomt met de volgorde waarop deze beacons zijn gepasseerd. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_2_1_results}
+\end{minipage}
+
+Als opvallende uitzondering op deze volgorde is er tag 5, welke zeer hard naar voor gesprongen is in de volgorde. Wat nog maar eens onderstreept dat RSSI metingen niet precies zijn, en dat een combinatie van fenomenen zoals reflecties en stralingspatronen toevallige miscategorisaties kunnen veroorzaken. In deze test was dit niet het geval, maar de relatieve plaats van tag 5 is versprongen van op de grens tussen locatie B en C naar de grens tussen locatie A en B.
+
+\paragraph{Testconclusie}
+Deze test vertoont, buiten een betere spreiding van de locatiebeacons in de tijd, geen noemenswaardige verschillen met test 1 van het vorige scenario.
+
+\subsubsection{Test 2: gang omringd door 4 locaties van variabele grootte}
+\begin{minipage}{0.55\textwidth}
+Deze test is analoog aan het vorige scenario, test 2, mat als enige verschil dat de locatiebeacons niet geplaatst zijn in het middelpunt, maar aan de deur.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_2_2_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+Ook bij deze resultaten, zichtbaar in bijgevoegde tabel, zijn de verschillen met de overeenkomstige test uit het vorige scenario ,beperkt. Het enige wat opvalt is dat de maximale RSSI-waardes van locatiebeacons B en C vrij veel zijn verhoogd, wat het gevolg is van de geografie. Locatiebeacon B ligt in dit geval niet meer achter een muur, en C ligt niet meer diep in een kamer, gecombineerd met een muur. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_2_2_results}
+\end{minipage}
+
+\paragraph{Testconclusie}
+Het lijkt erop dat het plaatsen van de locatiebeacons aan de deur in een realistische opstelling voordelen heeft tegenover in het midden van de kamer, voornamelijk op vlak van betere RSSI. Dit was niet het geval tijdens test 1 aangezien het effect van muren en deuren afwezig is in deze test. Verder is het wel zo dat een deur (zoals het geval bij beacon B) zich niet noodzakelijk in het midden van de locatie bevind. Dit heeft natuurlijk een affect op de toewijzing, aangezien de overgangslijn/tijd niet meer midden tussen de locatiebeacons moet geplaatst worden, maar verschoven worden afhankelijk van de geografie van de locaties.
+
+\subsubsection{Deelconclusie}
+Dit scenario heeft een licht voordeel tegenover vorig scenario, maar enkel als het aankomt op een opstelling niet in een open ruimte. Het lijkt qua detectie en spreiding in de tijd beter om de locatiebeacons dichter bij de gang te hangen. De hypothese is aangenomen.
 
 \subsection{Meerdere locatiebeacons per locatie}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling slaagt er in om met een BLE beacon getagde assets correct te lokaliseren.
+
+\subsubsection{Test 1: 2 even grote locaties in open ruimte}
+\begin{minipage}{0.55\textwidth}
+Voor deze test worden er in een open ruimte 2 locaties gecreëerd, met een locatiebeacon (MokoSmart H5) in elke hoek, waarvan bij de 2 overlappende hoeken een gemeenschappelijke locatiebeacon. Deze beacons liggen 2m uit elkaar. Ook zullen er assetbeacons verspreid worden, aangegeven door de cijfers op de figuur. Verder zal een gateway voorbij komen volgens de pijl. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_3_1_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+Na het aggregeren en analyseren van de testdata is zeer snel iets interessants opgevallen, als deze data verwerkt wordt door enkel te kijken naar de locatiebeacons die het dichtst tegen de gang aan liggen, en verder wordt gekeken naar de hoogste RSSI-waardes zoals in de vorige 2 scenario's klopt de lokalisatie perfect mits de grenslijn tegen de locatiebeacon wordt aangelegd. Dit wilt zeggen dat deze opstelling overbodig uitgebreid is en kan herleid worden tot het vorige scenario. 
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_3_1_results}
+\end{minipage}
+
+Interessant is wel dat het ook mogelijk is om hetzelfde resultaat te bekomen met de achterste rij locatiebeacons (aangeduid in licht blauw in bijgevoegde resultatentabel). Het is echter wel duidelijk dat deze punten dichter bij elkaar liggen in de tijd en dus minder nauwkeurig zullen zijn (zoals duidelijk het geval is met assetbeacon 2 en 6, welke in theorie buiten de locatie zouden vallen).
+
+\paragraph{Testconclusie}
+Dit scenario is overbodig complex en kan vereenvoudigd worden tot het vorige. Deze test heeft wel nogmaals bevestigd dat het voor de precisie beter is als de locatiebeacons dichter bij de gang liggen.
+
+\subsubsection{Test 2: 2 even grote locaties gescheiden door muur}
+\begin{minipage}{0.55\textwidth}
+In deze testopstelling is een muur toegevoegd tussen de 2 locaties van de testopstelling van test 1. Verder blijft de opstelling gelijk.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_3_2_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+Uit het resultaat van deze test, zichtbaar in bijgevoegde tabel, is hetzelfde al te leiden als uit de resultaten van test 1. De helft van de locatiebeacons blijkt overbodig.
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_3_2_results}
+\end{minipage}
+
+\paragraph{Testconclusie}
+De toegevoegde muur heeft klaarblijkelijk geen effect op de resultaten, iets wat wel het geval was bij de statische versie van deze opstelling. Deze opstelling is wederom vereenvoudiggebaar naar die van vorig scenario.
+
+\subsubsection{Deelconclusie}
+Na deze testen kan afgeleid worden dat dit scenario te ver gezocht is, en hetzelfde resultaat kan bereikt worden met een een eenvoudigere opstelling en minder hardware. Alhoewel te hypothese technisch gezien correct is, zal dit scenario niet als beste uit de bus komen na dit onderzoek.
 
 \subsection{Beacons in rasteropstelling}
 \subsubsection{Deelconclusie}
-Na de zeer slechte testresultaten van de statische versie van dit scenario, en omdat dit scenario zich qua principe berust op dubbele trilateratie, waardoor de extreme onnauwkeurigheden bij enkele trilateratie enkel maar extremer zullen worden, is besloten dit scenario in te delen in dezelfde categorie.
+Na de zeer slechte testresultaten van de statische versie van dit scenario, en omdat dit scenario zich qua principe berust op dubbele trilateratie, waardoor de extreme onnauwkeurigheden bij enkele trilateratie enkel maar extremer zullen worden, is besloten dit scenario niet nader te onderzoeken.
 
 \subsection{Beacons op intervallen in de gang}
-%TODO
+\subsubsection{Deelhypothese}
+Deze opstelling slaagt er in om met een BLE beacon getagde assets correct te lokaliseren.
+
+\subsubsection{Test 1: 3 even grote locaties in open ruimte}
+\begin{minipage}{0.55\textwidth}
+De opstelling voor deze test is gelijkaardig aan de opstelling van het 1e dynamische scenario, test 1. Met als verschil dat de locaties niet meer 1 op 1 worden gedefinieerd door een locatiebeacon, maar dat deze locatiebeacons op gelijke afstand verspreid liggen in de gang (specifiek op 250cm onderlinge afstand). In deze opstelling bevinden de locatiegrenzen zich op resp. 2/3 de afstand tussen A en B, en op 1/3 de afstand tussen B en C. De rest van de afmetingen en opstelling zijn identiek.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_4_1_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+Ook de voorstelling van de resultaten, zichtbaar in bijgevoegde tabel, is gelijkaardig. De plaatsing van de scheidingslijn tussen de verschillende locaties is echter wel verschillend. Aangezien de locatie van de locatiegrenzen en de beacons niet meer aan elkaar gelinkt zijn, hangt het af van de specifieke opstelling hoe deze zich tot elkaar verhouden. Hier is dit 2/3 en 1/3, en door recht evenredige verhouding tussen de afstand en de tijd door de constante snelheid is de scheidingslijn ook zo geplaatst in de tabel.
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_4_1_results}
+\end{minipage}
+
+Na deze andere manier van locatietoewijzing zien we dat de lokaliseringsresultaten nog steeds goed overeen komen met de werkelijkheid. Dit met uitzondering van beacon 1, welke versprongen is versprongen van de eerste naar de laatste locatie. Dit fenomeen is al eerder tegengekomen in een eerdere test (5.4.2, test 1), en wordt daar besproken.
+
+\paragraph{Testconclusie}
+Deze test vertoont analoge resultaten aan eerdere scenario's.
+
+\subsubsection{Test 2: gang omringd door 4 locaties van variabele grootte}
+\begin{minipage}{0.55\textwidth}
+De opstelling voor deze test is gelijkaardig aan de opstelling van het 1e dynamische scenario, test 2. Idem aan test 1 worden de locatiebeacons geplaatst op gelijke afstanden in de tussenliggende gang. De locatieovergang tijdens deze test is vlak voor locatiebeacon B aan de rechterkant, en 1/3 de afstand tussen B en C langs de linkerkant van de gang.
+\end{minipage}
+\hfill
+\begin{minipage}{0.42\textwidth}
+	\includegraphics[width=\linewidth]{dble_4_2_floor}
+\end{minipage}
+
+\paragraph{Resultaat}
+\begin{minipage}{0.42\textwidth}
+Bijgevoegde tabel met resultaten is licht anders opgedeeld dan soortgelijke tabellen uit vorige tests, dit omdat er een opdeling is gemaakt tussen rechts en links van de gang. Dit is eenderzijds om een simulatie te maken voor een opstelling die een richting kan bepalen, en anderzijds omdat de definitie voor locatieovergang langs rechts en links verschilt, dus 1 lijn niet correct was geweest.
+Er is duidelijk te zien in de resultaten dat de lokalisatie goed is gebeurt en elk asset in de juiste locatie is ingedeeld.
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+	\includegraphics[width=\linewidth]{dble_4_2_results}
+\end{minipage}
+
+\paragraph{Testconclusie}
+Uit deze test is duidelijk dat ook in een reële situatie, assetbeacons in de gang een goede oplossing kan zijn.
+
+\subsubsection{Deelconclusie}
+Dit scenario heeft zeer gelijkaardige resultaten aan dynamisch scenario 1 en 2. Het verschil met deze scenario's is echter wel dat bij deze niet elke locatie een beacon nodig heeft, en de hardware kost dus lager is. Ook is het mogelijk de locatiedefinitie te veranderen zonder de hardware te moeten verhangen, wat een voordeel kan geven voor sommige use cases.
