@@ -1,9 +1,14 @@
-\chapter{\IfLanguageName{dutch}{Literatuurstudie}{State of the art}}
+%%=============================================================================
+%% Literatuurstudie
+%%=============================================================================
+
+\chapter{Literatuurstudie}
 \label{ch:literatuurstudie}
 
 Dit hoofdstuk zal een overzicht geven van de theoretische achtergrond van de hardware, protocollen, programma's en andere concepten die gebruikt zullen worden bij het gevoerde onderzoek voor het beantwoorden van bovengenoemde onderzoeksvraag.
 
 \section{Definities}
+\label{sec:lit-definities}
 Deze sectie zal enkele belangrijke begrippen introduceren die belangrijk zullen zijn bij het verdere lezen van dit hoofdstuk en de rest van het document.
 
 \subsubsection{RSSI}
@@ -28,24 +33,18 @@ Trilateratie is de berekening voor de bepaling van de coördinaten van een punt 
  \autocite{TRM2022}
 
 \section{Hardware}
-\label{sec:Hardware}
+\label{sec:lit-hardware}
 Deze sectie zal de gebruikte hardwaretechnologieën toelichten, deze zijn RFID en BLE.
 
 \subsection{RFID}
-\label{sec:RFID}
-RFID, of voluit Radio Frequency IDentification, is een draadloos communicatie systeem welke gebruik maakt van elektromagnetische golven. Een typische RFID opstelling bestaat uit 3 delen, nl. een zender/ontvanger combinatie of transceiver, een antenne, en een transponder of RFID-tag.\autocite{Auxcis2022} In essentie werkt dit als volgt: de transmitter laat de antenne een elektromagnetisch veld opwekken. Alle RFID-tags die zich in dit veld bevind zullen dit registreren en zij zullen ook een veld opwekken, welke op zijn beurt dan terug zal opgevangen worden door de antenne, waarna dit zal doorgegeven worden aan de receiver.. 
-% TODO: afbeelding refereren
-\begin{figure}[h]
-\includegraphics{werking_rfid}
-\centering
-\end{figure}
+\label{subsec:lit-rfid}
+RFID, of voluit Radio Frequency IDentification, is een draadloos communicatie systeem welke gebruik maakt van elektromagnetische golven. Een typische RFID opstelling bestaat uit 3 delen, nl. een zender/ontvanger combinatie of transceiver, een antenne, en een transponder of RFID-tag.\autocite{Auxcis2022} In essentie werkt dit als volgt: de transmitter laat de antenne een elektromagnetisch veld opwekken. Alle RFID-tags die zich in dit veld bevind zullen dit registreren en zij zullen ook een veld opwekken, welke op zijn beurt dan terug zal opgevangen worden door de antenne, waarna dit zal doorgegeven worden aan de receiver.
 In essentie zal de transmitter dus een signaal uitsturen, waarop alle RFID-tags binnen bereik zullen antwoorden, waarna dit antwoord terug zal belanden bij de receiver. De combinatie van de transceiver en de antenne wordt vaak een RFID lezer of reader genoemd, aangezien deze onderdelen steeds samen moeten werken en hardwarematig op 1 locatie zullen staan.\autocite{Amster2021}
 Deze transceiver is echter meestal niet gelimiteerd tot slechts 1 aangesloten antenne, afhankelijk van de gebruikte hardware kan deze ook 2 of 4 antennes aankoppelen. De data die de transceiver ontvangt van de RFID-tags kan vervolgens via diverse kanalen verzonden worden naar een computer of server die deze dan verder kan afhandelen.
 
 Alhoewel alle onderdelen in de opstelling in vele verschillende geuren en kleuren beschikbaar zijn, verschilt de functionaliteit bij de antenne en transceiver niet zozeer. De antennes kunnen verschillen in oppervlakte en vorm. Dit heeft invloed op de zone waaruit RFID-tags antwoorden zullen sturen. Een vlakke antenne stuurt voor zich uit, dus verwacht antwoorden van uit die richting, terwijl een staafvormige rondom zich straalt maar niet naar zijn uiteinden. De vorm van antenne beïnvloed ook de polarisatie van het EM veld, welke ook een invloed heeft op de RSSI. De keuze keuze tussen deze verschillende mogelijkheden is dus duidelijk afhankelijk van het toepassingsgebied. Ook de zendstekte kan variëren, maar deze is instelbaar (binnen grenzen bepaald door de transmitter). Echter blijft het hier qua verschillen voornamelijk bij. De RFID-tag daarentegen heeft veel meer fundamentele verschillen en types, welke ook een uitgebreide uitleg nodig hebben wil de lezer het komende onderzoek kunnen volgen.
 
 \subsubsection{De RFID-tag}
-\label{sec:De RFID-tag}
 Een RFID-tag, in zijn eenvoudigste vorm, bestaat uit 2 delen, nl. een IC of computerchip, en een antenne. Deze vorm wordt een passieve RFID-tag genoemd. Sommige tags beschikken ook over een interne batterij, deze actieve RFID-tags worden echter niet gebruikt tijdens dit onderzoek, en worden dus verder buiten beschouwing gelaten.\autocite{atlasrfidstore2022} 
 
 De IC in de antenne is het brein van de chip. Natuurlijk heeft hij, door zijn kleine gestalte, niet veel functionaliteit. De chip bevat 4 memory banks (slots voor data), van variabele lengte (verschillende producenten produceren chips met verschillende groottes per dataslot). Deze slots zijn als volgt: de EPC (Electronic Product Code), welke een code bevat die geplaatst is door de producent maar veranderbaar is door de gebruiker. De TID (Tag Identifier), welke een uniek, read-only tagnummer bevat. De User memory, waar de gebruiker data kan opslaan, en de Reserved Memory bank, welke beveiligingsdata bevat voor het veranderen van de user memory.\autocite{Smiley2017} Deze laatste 2 zullen ongebruikt blijven bij dit onderzoek aangezien de data in de chip niet belangrijk is, maar vooral de locatie en de identificatie van de chip.
@@ -53,7 +52,6 @@ De IC in de antenne is het brein van de chip. Natuurlijk heeft hij, door zijn kl
 Het 2e deel van de tag, de antenne, beslaat fysiek de grootste oppervlakte van de tag. De taak van dit onderdeel is de EM signalen, uitgezonden door de transmitter, op te vangen. Waarna dit signaal gemoduleerd wordt in functie van de opgeslagen data in de dataslots en ze daarna teruggezonden wordt. Aangezien deze tags niet over een interne batterij beschikken, kaatsen ze de energie van de transmitter terug (in een licht andere golflengte en ritme door het moduleren). Dit wordt backscattering genoemd. Door deze relatie is de signaalsterkte van de transmitter dus even verantwoordelijk voor de RSSI, als de afstand tussen de tag en de antenne. Daarom is dit ook een zeer belangrijke variabele in dit verdere onderzoek.\autocite{atlasrfidstore2022a}
 
 \subsubsection{RSSI beïnvloedende factoren}
-\label{sec:RSSI beïnvloedende factoren}
 In de voorgaande paragrafen zijn al enkele factoren opgesomd die de RSSI beïnvloeden, echter zijn dit niet de enige. Zo hebben we de zogenaamde SOAP: Size, Orientation, Angle en Placement.
 \begin{itemize}
 	\item \underline{Size}:
@@ -69,7 +67,7 @@ Buiten deze voorgaande factoren zijn er nog enkele factoren die minder te beïnv
 De oplettende lezer heeft al opgemerkt dat deze factoren een grote invloed kunnen hebben op de resultaten van dit onderzoek. Uiteraard zullen alle testen moeten gebeuren in een gecontroleerde omgeving, waar de invloed van deze factoren zo veel mogelijk zal worden geminimaliseerd. De specifieke uitwerking hieromtrent is vindbaar onder Hoofdstuk~\ref{ch:methodologie}.
 
 \subsection{BLE}
-\label{sec:BLE}
+\label{subsec:lit-ble}
 BLE, of voluit Bluetooth Low Energy, is een opvolger van de klassieke Bluetooth (meer specifiek is het versie 4.0). Het is zoals zijn voorganger dus ook een standaard voor korte afstand datatransfer. Waarin het echter verschilt is dat het minder energie verbruikt, vandaar het low energy gedeelte van de naam. Het bereikt dit door lagere transfer snelheden, en het feit dat het data verzend in korte packets, en tussen de zendingen in slaapstand gaat. Dit in tegenstelling tot klassieke Bluetooth, welke een blijvende connectie onderhoud en dus nooit slaapt. Dit betekend dat BLE tot wel 100x minder energie kan verbruiken dan klassieke Bluetooth. \autocite{Nesbo2021}
 
 In de context van dit onderzoek zal deze vorm van datatransfer gebruikt worden in een set-up die bestaat uit 2 delen (waarvan er van elk 1 of meerdere aanwezig zijn), nl. BLE beacons en IoT gateways.
@@ -96,11 +94,6 @@ Zoals de naam doet vermoeden is deze gateway niet specifiek voor BLE, maar is he
 
 \subsubsection{Het Eddystone protocol}
 Zoals eerder vermeld is Eddystone het protocol welke gebruikt zal worden voor deze testen, en wordt hier verder in detail besproken. Eddystone is een BLE protocol ontworpen door Google en wordt onderhouden sinds 2015. Het bestaat uit berichten met 3 verschillende frame types. 
-% TODO: afbeelding refereren
-\begin{figure}[h]
-	\includegraphics{eddystone_formats}
-	\centering
-\end{figure}
 \begin{itemize}
 	\item \underline{UID}:
 	Dit frame (frametype x00) is het frame voor de broadcasting van het unieke beacon ID, of UID. Het bevat ook een veld genaamd 'Tx Power at 0m', dit is bedoeld om de RSSI waarde op 0m van de beacon mee te geven. Dit kan voor sommige toepassingen belangrijk zijn aangezien de standaard RSSI verschilt tussen verschillende beacon types, en er ook de mogelijkheid bestaat om een offset aan deze RSSI in te stellen.
@@ -111,7 +104,7 @@ Zoals eerder vermeld is Eddystone het protocol welke gebruikt zal worden voor de
 \end{itemize}\autocite{Google2018}
 
 \section{Software}
-\label{sec:Software}
+\label{sec:lit-software}
 Deze sectie zal de voornaamste software die gebruikt zal worden tijdens het onderzoek toelichten.
 
 \subsubsection{ARTA}
@@ -122,6 +115,3 @@ RabbitMQ is een Open source message broker. Het is een programma welke berichten
 
 \subsubsection{MQTT Explorer}
 MQTT Explorer is een programma voor het accepteren en visualiseren van berichten verstuurd over MQTT, deze zal gebruikt worden om de berichten verstuurd door RabbitMQ op te vangen zodat ze zichtbaar zijn voor visualisatie.\autocite{Nordquist2019}
-
-\subsubsection{Hertz}
-Hertz is het custom middleware platform van Aucxis. Deze zorgt voor de verbinding tussen ofwel MQTT berichten bij BLE en de lezer bij RFID eenderzijds, en een API anderzijds. Deze zal gebruikt worden als de verkregen data geanaliseerd moet worden via een script of dergelijke en op een computer moet geraken.\autocite{Hertz2020}
