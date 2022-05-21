@@ -2,39 +2,28 @@
 %% Samenvatting
 %%=============================================================================
 
-% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
-% thesis) synthese van het document.
-%
 % Deze aspecten moeten zeker aan bod komen:
-% - Context: waarom is dit werk belangrijk?
-% - Nood: waarom moest dit onderzocht worden?
-% - Taak: wat heb je precies gedaan?
-% - Object: wat staat in dit document geschreven?
-% - Resultaat: wat was het resultaat?
-% - Conclusie: wat is/zijn de belangrijkste conclusie(s)?
-% - Perspectief: blijven er nog vragen open die in de toekomst nog kunnen
+% -x Context: waarom is dit werk belangrijk?
+% -x Nood: waarom moest dit onderzocht worden?
+% -x Taak: wat heb je precies gedaan?
+% -x Object: wat staat in dit document geschreven?
+% -x Resultaat: wat was het resultaat?
+% -x Conclusie: wat is/zijn de belangrijkste conclusie(s)?
+% -x Perspectief: blijven er nog vragen open die in de toekomst nog kunnen
 %    onderzocht worden? Wat is een mogelijk vervolg voor jouw onderzoek?
 %
 % LET OP! Een samenvatting is GEEN voorwoord!
 
-%%---------- Nederlandse samenvatting -----------------------------------------
-%
-% TODO: Als je je bachelorproef in het Engels schrijft, moet je eerst een
-% Nederlandse samenvatting invoegen. Haal daarvoor onderstaande code uit
-% commentaar.
-% Wie zijn bachelorproef in het Nederlands schrijft, kan dit negeren, de inhoud
-% wordt niet in het document ingevoegd.
-
-\IfLanguageName{english}{%
-\selectlanguage{dutch}
-\chapter*{Samenvatting}
-\lipsum[1-4]
-\selectlanguage{english}
-}{}
-
 %%---------- Samenvatting -----------------------------------------------------
 % De samenvatting in de hoofdtaal van het document
 
-\chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
+\chapter{Samenvatting}
 
-//TODO
+Dit onderzoek is uitgevoerd in samenwerking met Aucxis, zij willen hun bestaande pakket RFID oplossingen uitbreiden met BLE toepassingen. Dit voornamelijk met oog op het taggen van assets, en de lokalisatie van deze getagde assets. De softwarekant van deze toepassing is 1 ding, maar het is ook belangrijk om te weten hoe de hardware moet opgesteld worden om bruikbare informatie te verkrijgen voor deze lokalisatie. Vandaar is er nood aan een onderzoek in dit thema, en de uitwerking van dit onderzoek staat beschreven in dit document. 
+
+Dit onderzoek bestaat uit een set van 12 hardwareopstellingen, bestaande uit RFID of BLE hardware, die elk afzonderlijk worden onderzocht en getest op diverse manieren. Het voornaamste doel van deze deelonderzoeken is het bepalen hoe goed deze een getagd asset kunnen indelen in de correcte locatie. Locatie in de context van dit onderzoek is een logische locatie, d.w.z. een bureau, een reparatiezone e.d. Na elk deelonderzoek wordt een conclusie getrokken, en deze conclusies worden finaal gebundeld tot een grote algemene conclusie in het gelijknamige hoofdstuk. 
+
+De voornaamste conclusie is dat een optimale opstelling voor locatie- en verplaatsingsbepaling van een getagd asset een combinatie is tussen 1 gateway plaatsen in het midden van een locatie, mits dit een ommuurde locatie is (bv. een lokaal of magazijn). En het omringen van de locatie met gateways in de hoeken als er meerdere locaties in een open ruimte zijn, zonder fysieke scheiding tussen deze locaties (bv. zones in een magazijn die tellen als aparte logische locatie). 
+Hoewel dit de voornaamste conclusie is, aangezien dit een rechtstreeks antwoord is op de gestelde onderzoeksvraag, zijn er ook andere opstellingen die zeer goede resultaten leverden, zijnde het niet specifiek voor de gestelde vraag. In toepassingen met oog op inventarisatie zijn dynamische BLE opstellingen bijvoorbeeld een zeer goede optie.
+
+Ook is de diepgang van dit onderzoek, omdat het eerder verkennend van aard is, vrij beperkt. Er is wel een beste optie uit de bus gekomen, maar er zijn nog veel variabelen die in dit onderzoek constant zijn gehouden, waar diepgaander onderzoek naar kan gedaan worden om hun invloed op de lokalisatie te bepalen, zoals de beacon instellingen.

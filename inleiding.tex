@@ -8,8 +8,8 @@
 \section{Probleemstelling}
 \label{sec:probleemstelling}
 
-Momenteel is Aucxis,de opdrachtgever en partner voor dit onderzoek, bezig met het uitwerken en ontwikkelen van hun Polaris platform. Het voornaamste doel van dit platform is het kunnen volgen van voorwerpen binnen en buiten bedrijven. Dit aan de hand van verschillende technologieën, voornamelijk RFID en BLE binnen het bedrijf, en GPS daarbuiten. 
-Het concept van dit platform is dat er logische locaties bestaan (zoals warenhuis 1 of keuken), waar de voorwerpen zich bevinden. Voor een goede werking van dit systeem is het duidelijk nodig dat uit de data bekomen uit de hardware kan afgeleid worden op welke logische locatie een voorwerp zich bevind en wanneer het zich verplaatst tussen locaties. Dit is geen normaal softwareprobleem want logischerwijs zal de manier waarop de hardware staat opgesteld een grote invloed hebben op de nauwkeurigheid en correctheid van deze lokalisaties en verplaatsingen. Hierdoor is het van groot belang voor de correcte werking van dit platform dat een goede opstelling wordt gekozen en om dit te kunnen doen is er een onderzoek nodig naar wat deze optimale opstelling zou kunnen zijn. Dit is ook de reden dat dit onderzoek in het leven is geroepen.
+Momenteel is Aucxis, de opdrachtgever en partner voor dit onderzoek, bezig met het uitwerken en ontwikkelen van hun Polaris platform. Het voornaamste doel van dit platform is het kunnen volgen van voorwerpen binnen en buiten bedrijven. Dit aan de hand van verschillende technologieën, voornamelijk RFID en BLE binnen het bedrijf, en GPS daarbuiten. 
+Het concept van dit platform is dat er logische locaties bestaan (zoals warenhuis 1 of keuken), waar de voorwerpen zich bevinden. Voor een goede werking van dit systeem is het duidelijk nodig dat uit de data bekomen uit de hardware kan afgeleid worden op welke logische locatie een voorwerp zich bevind en wanneer het zich verplaatst tussen locaties. Dit is geen normaal softwareprobleem want logischerwijs zal de manier waarop de hardware staat opgesteld een grote invloed hebben op de nauwkeurigheid en correctheid van deze lokalisaties en verplaatsingen. Hierdoor is het van groot belang voor de correcte werking van dit platform dat er een goede opstelling wordt gekozen. Om dit te kunnen doen is er een onderzoek nodig naar wat deze optimale opstelling zou kunnen zijn. Dit is ook de reden dat dit onderzoek in het leven is geroepen.
 
 \section{Wie is Aucxis}
 \label{sec:wie-is-aucxis}
@@ -18,33 +18,29 @@ Aucxis is een bedrijf gevestigd te Stekene, welke actief is sinds 1983. Bij opri
 \section{Onderzoeksvraag}
 \label{sec:onderzoeksvraag}
 
-Zoals duidelijk is geworden in de probleemstelling is er nood aan een onderzoek voor het vinden van een zo optimaal mogelijke opstelling voor het bepalen van locaties waar een voorwerp zich bevind, en de verplaatsing van een voorwerp tussen die locaties. Met oog op deze probleemstelling luidt de onderzoeksvraag voor deze bachelorproef als volgt:
+Zoals duidelijk is geworden in de probleemstelling is er nood aan een onderzoek voor het vinden van een zo optimaal mogelijke opstelling voor het bepalen van de locatie waar een voorwerp zich bevind. Verder is ook de detectie van een verplaatsing belangrijk, dit gebeurt als de locatie van het voorwerp verandert. Met oog op deze probleemstelling luidt de onderzoeksvraag voor deze bachelorproef als volgt:
 \begin{center}
 	\textbf{Welke hardwareopstelling, bestaande uit RFID of BLE componenten, is optimaal voor de plaats- en verplaatsingsbepaling van een voorwerp binnen een gebouw.}
 \end{center}
-Deze vraag omvangt goed de essentie van de situatie die dient onderzocht te worden, namelijk de beste opstelling voor het volgen van een voorwerp binnen een gebouw, en dit met RFID of BLE technologie. Binnen de probleemstelling werd echter ook aangegeven dat binnen de scope van Polaris ook gps lokalisatie voor voorwerpen buiten het bedrijf aanwezig was. Locatiebepaling met behulp van gps is echter al goed ingeburgerd, waardoor er voldoende bronnen zijn en dit ook duidelijk en precies is, waardoor het geen nut heeft dit ook te onderzoeken en dus wordt dit onderdeel buiten de scope van dit onderzoek gehouden. Plaatsbepalingen binnen zijn echter niet zo optimaal voor gps aangezien de meeste gebouwen/kantoren beschikken over verdiepen (waar er dus meerdere locaties dezelfde geografische coördinaat hebben), en gps ook een bepaalde onzekerheid heeft op de meting.
+Deze vraag omvangt goed de essentie van de situatie die dient onderzocht te worden, namelijk de beste opstelling voor het volgen van een voorwerp binnen een gebouw, en dit met RFID of BLE technologie. Binnen de probleemstelling werd echter ook aangegeven dat binnen de scope van Polaris ook gps lokalisatie voor voorwerpen buiten het bedrijf aanwezig was. Locatiebepaling met behulp van gps is echter al goed ingeburgerd, waardoor er voldoende bronnen zijn en dit ook duidelijk en precies is. Door deze reden is er geen nut om dit ook te onderzoeken en wordt dit onderdeel buiten de scope van dit onderzoek gehouden. Plaatsbepalingen binnen zijn echter niet zo optimaal voor gps aangezien de meeste gebouwen/kantoren beschikken over verdiepen (waar er meerdere locaties dezelfde geografische coördinaat hebben), en gps ook een bepaalde onzekerheid heeft op de meting.
 
 \section{Onderzoeksdoelstelling}
 \label{sec:onderzoeksdoelstelling}
 
 Het hoofddoel van dit onderzoek is het vergelijken van een aantal opstellingen, met RFID of met BLE, en met verschillende concepten achter hun werking. De verschillende opstellingen met hun theoretische achtergrond volgen verder in dit verslag. Zoals de onderzoeksvraag echter al doet vermoeden is het doel niet louter een vergelijkende studie, aangezien het ook de bedoeling is dat er een optimale opstelling uit de bus komt. 
-In praktijk zal er nooit een opstelling zijn die de beste is, aangezien er altijd een afweging zal zijn tussen de nauwkeurigheid en de kostprijs van de opstelling. Ook zullen sommige opstellingen beter zijn in bepaalde situaties dan andere. Wel zal het mogelijk zijn om totaal onpraktische en onnauwkeurige opstellingen uit te branden. De conclusie zal dus eerder een afweging geven tussen de verschillende opstellingen, maar zal zeker geen louter vergelijkende aard hebben.
+In praktijk zal er nooit een opstelling zijn die de beste is, aangezien er altijd een afweging zal zijn tussen de nauwkeurigheid en de kostprijs van de opstelling. Ook zullen sommige opstellingen beter zijn in bepaalde situaties dan andere. Wel zal het mogelijk zijn om totaal onpraktische en onnauwkeurige opstellingen uit te branden. De conclusie zal eerder een afweging geven tussen de verschillende opstellingen, maar zal zeker geen louter vergelijkende aard hebben.
 
-\section{Opzet van deze bachelorproef}
+\section{Opzet van dit onderzoek}
 \label{sec:opzet-bachelorproef}
 
-% Het is gebruikelijk aan het einde van de inleiding een overzicht te
-% geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
-% die je kan aanvullen/aanpassen in functie van je eigen tekst.
+De rest van dit onderzoek is als volgt opgebouwd:
 
-De rest van deze bachelorproef is als volgt opgebouwd:
-
-In Hoofdstuk~\ref{ch:literatuurstudie} wordt een overzicht gegeven van de theoretische achtergrond die nodig is voor het begrijpen van het onderzoek en de rest van deze bachelorproef. Het bevat informatie over de werking van de RFID en BLE technologieën, definities van veelvoorkomende begrippen en diverse andere nodige uitleg.
+In Hoofdstuk~\ref{ch:literatuurstudie} wordt een overzicht gegeven van de theoretische achtergrond die nodig is voor het begrijpen van het onderzoek en de rest van dit onderzoek. Het bevat informatie over de werking van de RFID en BLE technologieën, definities van veelvoorkomende begrippen en diverse andere benodigde uitleg.
 
 In Hoofdstuk~\ref{ch:opstellingen} worden de onderzochte opstellingen opgesomd, samen met een theoretische achtergrond. Het is een projectie van de kennis opgedaan tijdens de literatuurstudie op de te onderzoeken opstellingen.
 
 In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvraag.
 
-In Hoofdstuk~\ref{ch:testen} worden de uitgevoerde testen beschreven, de resultaten verwerkt en geconcludeerd.
+In Hoofdstuk~\ref{ch:testen} worden de uitgevoerde tests beschreven, de resultaten verwerkt en geconcludeerd.
 
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de algemene conclusie gegeven en een antwoord geformuleerd op de onderzoeksvraag. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt eerst de voornaamste informatie gebundeld, waarna deze gebruikt wordt om een algemene conclusie te gegeven en een antwoord te formuleren op de onderzoeksvraag. Daarna wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.

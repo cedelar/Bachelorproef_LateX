@@ -4,15 +4,258 @@
 
 \chapter{Conclusie}
 \label{ch:conclusie}
+\section{Informatiebundeling}
+\label{sec:con-inf}
+Voordat een algemene conclusie getrokken kan worden, is het interessant alle relevante informatie op een rijtje te plaatsen. Hieronder volgt een opsomming van alle onderzochte opstellingen, waarbij voor elk hun toepassingsgebied wordt bijgevoegd, alsook de eventuele \textcolor{ForestGreen}{voor-} en \textcolor{RedOrange}{nadelen}. Al deze informatie is reeds beschikbaar in de corpus en voornamelijk de deelconclusies in hoofdstuk~\ref{ch:testen}. De informatie voor de algemene voor- en nadelen wordt gehaald uit hoofdstuk~\ref{ch:opstellingen}. Deze gelden voor elke opstelling in de specifieke technologie.
 
-% TODO: Trek een duidelijke conclusie, in de vorm van een antwoord op de
-% onderzoeksvra(a)g(en). Wat was jouw bijdrage aan het onderzoeksdomein en
-% hoe biedt dit meerwaarde aan het vakgebied/doelgroep? 
-% Reflecteer kritisch over het resultaat. In Engelse teksten wordt deze sectie
-% ``Discussion'' genoemd. Had je deze uitkomst verwacht? Zijn er zaken die nog
-% niet duidelijk zijn?
-% Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
-%onderzoek?
+Ook wordt er een benadering gegeven voor de kostprijs, de informatie voor deze berekening is reeds beschikbaar in hoofdstuk~\ref{ch:methodologie}. Deze kostprijs \(K\) wordt uitgedrukt als \(K = f(l, a)\) met \(l\) het aantal locaties en \(a\) het aantal assets. Dit zijn de 2 voornaamste schaalfactoren voor de kosten.
 
-//TODO
+Het doel van deze sectie is een gestructureerde weergave van de meest interessante informatie te geven, als basis voor het nemen van de feitelijke eindconclusie.
 
+\subsection{RFID Algemeen}
+\label{sec:con-ant-RFID}
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Goedkope tags
+	\item Tags vereisen geen/minimaal onderhoud
+	\color{RedOrange}
+	\item Dure uitrolkosten
+	\item Tags enkel detecteerbaar in RFID doorgang
+	\item Tagoriëntatie in de RFID doorgang is belangrijk
+\end{itemize}
+
+\subsection{BLE Algemeen}
+\label{sec:con-ant-BLE}
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Beacons steeds detecteerbaar
+	\item Goedkope uitrolkosten
+	\item Tagoriëntatie verwaarloosbaar
+	\color{RedOrange}
+	\item Beacons vereisen onderhoud
+	\item Relatief dure beacons
+	\item Grote variatie op RSSI waarden
+\end{itemize}
+
+\subsection{Static RFID: 1 antenne aan deurlijst}
+Bruikbaar bij afgesloten ruimtes met (smalle) toegangen als locatie.
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+\color{ForestGreen}
+\item Goedkoopste/minimale RFID optie
+\color{RedOrange}
+\item Geen richtingsdetectie
+\item Enkel te gebruiken in deurdoorgang
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 1400 \cdot l + 0.01 \cdot a\)
+
+\emph{De kostprijs per locatie kan verlaagd worden door meerdere antennes op 1 transceiver aan te sluiten, als de in-/uitgangen van deze locaties dicht genoeg bij elkaar liggen}
+
+\subsection{Static RFID: 2 antennes aan deurlijst}
+Bruikbaar bij afgesloten ruimtes met (smalle) toegangen als locatie.
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Richtingsdetectie
+	\color{RedOrange}
+	\item Past moeilijker in deurlijst door breedte 2 antennes + eventuele tussenafstand bij bredere doorgang.
+	\item Enkel te gebruiken in deurdoorgang
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 1450 \cdot l + 0.01 \cdot a\)
+
+\emph{De kostprijs per locatie kan verlaagd worden door 2 antenneparen op 1 4-port transceiver aan te sluiten, als de in-/uitgangen van deze locaties dicht genoeg bij elkaar liggen}
+
+\subsection{Static RFID: 1 antenne tegenover deur}
+Bruikbaar bij afgesloten ruimtes met een (korte) gang als toegang, als locatie.
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Richtingsdetectie
+	\item Slechts 1 antenne
+	\color{RedOrange}
+	\item Vereist langere gang dan enkel deurdoorgang voor goede werking
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 1400 \cdot l + 0.01 \cdot a\)
+
+\emph{De kostprijs per locatie kan verlaagd worden door meerdere antennes op 1 transceiver aan te sluiten, als de in-/uitgangen van deze locaties dicht genoeg bij elkaar liggen}
+
+\subsection{Dynamic RFID: 1 tag aan deurlijst}
+Bruikbaar bij afgesloten ruimtes met (smalle) toegangen, als locatie.
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Goedkoop door slechts 1 reader
+	\color{RedOrange}
+	\item Niet noodzakelijk detectie van \emph{alle} aanwezige assets.
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 1400 + 0.01 \cdot (l + a)\)
+
+\subsection{Static BLE: 1 gateway per locatie}
+Bruikbaar bij alle reële locaties gescheiden door muren.
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Goedkoop
+	\item Eenvoudig
+	\color{RedOrange}
+	\item Niet goed bruikbaar bij meerdere locaties in open ruimte.
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 100 \cdot l + 10 \cdot a\)
+
+\subsection{Static BLE: meerdere gateways per locatie}
+Overal bruikbaar, bij reële locaties gescheiden door muren vereenvoudiging mogelijk.
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Goede werking bij meerdere locaties in open ruimte.
+	\color{RedOrange}
+	\item Hogere hardwarekost
+	\item Kan worden vereenvoudigd
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 400 \cdot l + 10 \cdot a\)
+
+\emph{Veronderstelling van omringing door 4 gateways, meer of minder is mogelijk.}
+
+\subsection{Static BLE: gateways in rasteropstelling}
+Nergens bruikbaar
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Lagere hardwarekost door geen 1:1 relatie tussen locatiebeacons en locaties
+	\item Locatiedefinities veranderbaar zonder hardware aanpassingen
+	\color{RedOrange}
+	\item Werkt niet
+	\item Meer overhead door nood aan locatiedefiniëring
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = \ll100 \cdot l + 10 \cdot a\)
+
+\emph{Er kan ook meer dan 1 gateway per locatie in een raster staan, in dat geval zijn er echter goedkopere opstellingen mogelijk}
+
+\subsection{Dynamic BLE: 1 locatiebeacon per locatie, midden van locatie}
+Overal bruikbaar
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Lage hardwarekost
+	\item Werkt overal
+	\color{RedOrange}
+	\item Geen real-time detectie
+	\item Hoog batterijgebruik
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 100 + 10 \cdot (l + a)\)
+
+\subsection{Dynamic BLE: 1 locatiebeacon per locatie, aan deur}
+Overal bruikbaar
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Lage hardwarekost
+	\item Werkt overal
+	\item Nauwkeurigere detectie dan met beacon in midden van kamer
+	\color{RedOrange}
+	\item Geen real-time detectie
+	\item Meer overhead als deur met beacon niet in midden van kamer zit
+	\item Hoog batterijgebruik
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 100 + 10 \cdot (l + a)\)
+
+\subsection{Dynamic BLE: meerdere locatiebeacons per locatie}
+Overal bruikbaar, bij reële locaties gescheiden door muren vereenvoudiging mogelijk.
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Lage hardwarekost
+	\item Werkt overal
+	\color{RedOrange}
+	\item Geen real-time detectie
+	\item Kan worden vereenvoudigd
+	\item Hoog batterijgebruik
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 100 + 10 \cdot (l + a)\)
+
+\subsection{Dynamic BLE: locatiebeacons in rasteropstelling}
+Nergens bruikbaar
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Nog lagere hardwarekost door geen 1:1 relatie tussen locatiebeacons en locaties
+	\item Locatiedefinities veranderbaar zonder hardware aanpassingen
+	\color{RedOrange}
+	\item Werkt niet
+	\item Meer overhead door nood aan locatiedefiniëring
+	\item Hoog batterijgebruik
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 100 + 10 \cdot (\ll l + a)\)
+
+\emph{Er kan ook meer dan 1 locatiebeacon per locatie in een raster staan, in dat geval zijn er echter goedkopere opstellingen mogelijk}
+
+\subsection{Dynamic BLE: locatiebeacons op intervallen in de gang}
+Overal bruikbaar
+\paragraph{Voor- en nadelen}
+\begin{itemize}
+	\color{ForestGreen}
+	\item Nog lagere hardwarekost door geen 1:1 relatie tussen locatiebeacons en locaties
+	\item Locatiedefinities veranderbaar zonder hardware aanpassingen
+	\color{RedOrange}
+	\item Geen real-time detectie
+	\item Meer overhead door nood aan locatiedefiniëring
+	\item Hoog batterijgebruik
+\end{itemize}
+\paragraph{Kostprijs}
+\(K = 100 + 10 \cdot (\ll l + a)\)
+
+\emph{Er kan ook meer dan 1 locatiebeacon per locatie in de gangen hangen, in dat geval zijn er echter goedkopere opstellingen mogelijk}
+
+\section{Een antwoord op de onderzoeksvraag}
+\label{sec:con-ant}
+Na opsomming van de belangrijkste conclusies van alle onderzochte opstellingen in sectie~\ref{sec:con-inf}, is de tijd gekomen om een antwoord te formuleren op de onderzoeksvraag van dit onderzoek. Deze vraag luid als volgt \footnote{Zie Sectie~\ref{sec:onderzoeksvraag} op pagina~\pageref{sec:onderzoeksvraag}}.:
+\begin{center}
+	\textbf{Welke hardwareopstelling, bestaande uit RFID of BLE componenten, is optimaal voor de plaats- en verplaatsingsbepaling van een voorwerp binnen een gebouw.}
+\end{center}
+
+Om een antwoord te geven op deze onderzoeksvraag moet een vergelijking gemaakt worden tussen alle opstellingen. Een goed begin hiervoor is bij de gebruikte technologie.
+
+\paragraph{RFID vs BLE}
+Zoals aangehaald in secties~\ref{sec:con-ant-RFID} en~\ref{sec:con-ant-BLE} heeft elk van deze technologieën zijn voor- en nadelen. Echter is hier de vraag welke van deze voor- en nadelen het meeste doorweegt voor een goede en bruikbare lokalisatieopstelling. 
+Het fundamentele voordeel van BLE op dit vlak is nog steeds dat de getagde assets steeds zichtbaar zijn voor het systeem, en er altijd zeker is geweten of het asset aanwezig is, en waar, dit is niet het geval bij RFID. 
+
+Verder heeft BLE een voordeel door de lagere uitrolkosten van een systeem, wat de aanschafdrempel voor heel wat bedrijven, zeker deze met een kleiner budget, kan verlagen. De opschalingskosten, met name deze om meer assets te taggen, zijn hoger dan bij RFID, maar dit is voor toepassingen met een beperkt aantal assets niet zo'n probleem. Ook kan dit geleidelijk aan gebeuren samen met de groei van een bedrijf. Bijvoorbeeld een initiële investering van €5000 voor een systeem en elk jaar €2000 voor nieuwe beacons is realistisch, maar een uitrolkost van €50000 voor een RFID systeem, hoe klein de kost daarna ook mag zijn is veel onaantrekkelijker. Slechts als de kosten van de beacons in de buurt komt van de initiële kost van een RFID opstelling kan er een degelijke vergelijking gemaakt worden. Deze argumenten in acht nemend is het duidelijk dat BLE met oog op de onderzoeksvraag voor dit onderzoek de bovenhand heeft. De beste opstelling zal hierdoor komen uit de 8 BLE opstellingen.
+
+\paragraph{Statisch vs Dynamisch}
+Het volgende bestaande onderscheid is deze tussen de statische en dynamische opstellingen. Hier is het zo dat bij beide categorieën opstellingen bestaan die een perfecte lokalisatie bekomen van de assets. Hier bestaat een gelijkstand. Echter is dit niet het enige criteria in de onderzoeksvraag. Ook de detectie van een verplaatsing is vereist, en op dit vlak is er een falen van de dynamische opstellingen. Dit voornamelijk door hun fundamentele niet real-time aard. Bij dynamische opstellingen worden de assets enkel gedetecteerd als de gateway rondgaat in het gebouw. Op dat moment kan een asset al lang verplaatst zijn en is deze niet, of in het beste geval later gedetecteerd. In tegenstelling tot een statische opstelling, waarbij deze verplaatsing meteen wordt gedetecteerd van zodra de gemeten RSSI waarden zo veranderen dat deze bij een andere locatie wordt gecategoriseerd. Statische opstellingen hebben een betere, of op zijn minst snellere detectie, van een verplaatsing. 
+
+Verder is het wel zo dat de kostprijs van een statische opstelling hoger licht dan deze van een dynamische. Echter is dit verschil niet zo uitgesproken, en nog steeds draagbaar (€100 voor een gateway is niet zo veel, en zeker niet zo veel meer dan de €10 voor een beacon). Verder is er qua kostprijs ook de onderhoudskost te bekijken. Voor een dynamische opstelling moeten de beacons op elk moment zeer snel staan ingesteld, wat de batterijduur veel verkort en waardoor er sneller nieuwe batterijen, of nieuwe beacons als de batterij onvervangbaar is, nodig zijn. Bij statische opstellingen kunnen de beacons veel trager ingesteld staan en nog steeds een acceptabele lokalisatie geven, met langere batterijduur tot gevolg. Daarom zal de beste opstelling een van de drie statische opstellingen zijn.
+
+\paragraph{De keuze}
+Na vorige schiftingen blijven er nog 3 opstellingen over. Als eerste is het duidelijk dat de rasteropstelling niet de beste is, aangezien deze zeer slechte resultaten leverde. Verder is het, qua toepassingsgebied, duidelijk dat de opstelling met meerdere gateways per locatie de beste is uit de 2 overgebleven, aangezien deze werkt in een open ruimte en de opstelling met 1 gateway niet. Echter is het zo dat bij een situatie waarbij elke locatie omringt is door een muur, deze kan vereenvoudigd worden naar de opstelling met 1 gateway per locatie. Een combinatie van deze 2 opstellingen lijkt hierdoor het meest toegewezen om het probleem aangekaart in de onderzoeksvraag op te lossen.
+
+\paragraph{Het effectieve antwoord}
+Het antwoord op de onderzoeksvraag luid als volgt:
+\begin{center}
+	\textbf{Een combinatie van 2 statische BLE opstellingen, nl. 1 gateway per locatie voor ommuurde locaties, en meerdere gateways per locatie voor meerdere locaties in een open ruimte, is optimaal voor de plaats- en verplaatsingsbepaling van een voorwerp binnen een gebouw.}
+\end{center}
+
+\section{Nawoord}
+Het is ook duidelijk dat, hoewel dit de beste optie is als antwoord op de onderzoeksvraag zoals ze gesteld is, het merendeel van de andere opstellingen ook hun toepassingsgebied hebben. 
+
+Statische RFID opstellingen, hoewel hier achterwege gelaten voornamelijk door de hoge initiële kost, heeft toepassingen bij zeer hoge volumes assets. Dit is ook niet verrassend aangezien toepassingen van deze opstellingen de voornaamste bezigheid is van Aucxis, en zeker voor de toevoeging van BLE aan hun palmares. 
+
+Dynamische BLE opstellingen hebben ook uitermate goed gepresteerd, en hier zit zeker potentieel in. Het leent zich meer voor concepten zoals inventarisatie, waarbij de eis kan zijn dat er 1x per dag een update van locaties moet zijn en de mobiele gateway bv. aan de kar van de poetsvrouw kan hangen. Echter is het niet geschikt voor (real-time) verplaatsingsdetectie zoals de eis was voor dit onderzoek.
+
+\section{Verder onderzoek}
+Dit onderzoek is voornamelijk bedoeld als verkennend, het verkennen van veel verschillende soorten opstellingen zonder al te diep op hun in te gaan. Er is nu een antwoord uit de bus gekomen, maar dit is in essentie de optie die het meeste kans maakt om optimaal te zijn. Hierbij is verder onderzoek nodig naar de invloed van verschillende factoren die tijdens dit onderzoek constant zijn genomen. Dit zijn voornamelijk de invloed van de grootte van de locaties (opschalen van de testopstelling) en de invloed van de zendsterkte van de beacons. Maar verder ook meer specifieke variabelen zoals de soort gateway en beacons, de inhoud van de locaties (qua meubels en eventueel reflecterende materialen), het soort muren en deuren en zo veel andere beïnvloedende factoren. Het spreekt voor zich dat een onderzoek naar al deze factoren een onderzoek is van dezelfde grootteorde als deze, en dit niet meer bij de scope van dit onderzoek hoort.
+
+Verder zijn tijdens dit onderzoek de opstellingen in een raster met trilateratie gefaald door de limitatie van het zeer onjuiste omrekening van RSSI waardes naar afstand. Echter is dit niet de enige mogelijkheid om uit deze data een locatie te bepalen, en hoogstwaarschijnlijk kan er, na enig onderzoek, een algoritme bedacht worden die wel acceptabele resultaten geeft. Dit lag echter ook buiten de scope van dit onderzoek.

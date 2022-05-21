@@ -5,20 +5,31 @@
 \chapter{Methodologie}
 \label{ch:methodologie}
 
-Het hoofddoel, namelijk het bepalen van een optimale hardwareopstelling, zal in eerste instantie opgedeeld worden in enkele deelonderzoeken, 1 deelonderzoek per hardwareopstelling. Elk deelonderzoek zal verder onderverdeeld worden in een deelhypothese (Hoe de opstelling in theorie zou moeten presteren, opgebouwd uit veronderstellingen en theoretische waarheden aangehaald in Hoofdstuk~\ref{ch:literatuurstudie}), enkele tests, en een deelconclusie. Deze deelconclusie zal een vergelijking zijn tussen de hypothese en de eigenlijke uitkomst, een opsomming van de voor- en nadelen, een maat voor het aantal correct gelokaliseerde assets en een uiteenzetting over de factoren die al dan niet aanwezig moeten zijn om het principe acceptabel te maken. Ten slotte zullen de deelconclusies vergeleken worden en zal er een algemene conclusie bepaald worden in Hoofdstuk~\ref{ch:conclusie}). De onderzochte opstellingen, 12 in totaal, zijn hoogstwaarschijnlijk niet alle mogelijke manieren waarop de onderzoeksopzet, namelijk het registreren van verplaatsingen, kan gebeuren. De bepaling van deze set zijn het resultaat van een overleg met Aucxis welke opstellingen het meest kans hebben om te werken, en het interessantst zijn voor hen om onderzocht te zien. Voor de oplijsting van deze opstellingen, samen met een korte theoretische achtergrond wordt de lezer verwezen naar Hoofdstuk~\ref{ch:opstellingen}.
+Het hoofddoel, namelijk het bepalen van een optimale hardwareopstelling, zal in eerste instantie opgedeeld worden in enkele deelonderzoeken, 1 deelonderzoek per hardwareopstelling. Elk deelonderzoek zal verder onderverdeeld worden in een deelhypothese, enkele tests, en een deelconclusie. Deze deelconclusie zal een vergelijking zijn tussen de hypothese en de eigenlijke uitkomst, een opsomming van de eventuele voor- en nadelen, een maat voor het aantal correct gelokaliseerde assets en een uiteenzetting over de factoren die al dan niet aanwezig moeten zijn om het principe acceptabel te maken. Ten slotte zullen de deelconclusies vergeleken worden en zal er een algemene conclusie bepaald worden in Hoofdstuk~\ref{ch:conclusie}). De onderzochte opstellingen, 12 in totaal, zijn hoogstwaarschijnlijk niet alle mogelijke manieren waarop de onderzoeksopzet, namelijk het lokaliseren van assets en het registreren van verplaatsingen, kan gebeuren. De bepaling van deze set zijn het resultaat van een overleg met Aucxis welke opstellingen het meest kans hebben om te werken, en het interessantst zijn voor hen om onderzocht te zien. Voor de oplijsting van deze opstellingen, samen met een korte theoretische achtergrond wordt de lezer verwezen naar Hoofdstuk~\ref{ch:opstellingen}.
 
-Voordat er experimenten kunnen gebeuren is het belangrijk een oplijsting te maken van enkele constanten doorheen het onderzoek. Voornamelijk op het vlak van de gebruikte hardware en de standaardinstellingen waarmee dit onderzoek zal gebeuren. Deze constanten zijn geldig gedurende het volledige onderzoek, tenzij anders aangegeven.
+Voordat er experimenten kunnen gebeuren is het belangrijk een oplijsting te maken van enkele constanten doorheen het onderzoek. Voornamelijk op het vlak van de gebruikte hardware en de standaardinstellingen waarmee dit onderzoek zal gebeuren. Deze constanten zijn geldig gedurende het volledige onderzoek, tenzij anders aangegeven. Ook wordt een ruwe prijskaart aan de onderdelen gehangen, om een vergelijking te kunnen maken tussen de hardwareprijzen per opstelling in Hoofdstuk~\ref{ch:conclusie}. Deze prijzen zijn gebaseerd op de grootteordes van de gangbare prijzen tijdens het schrijven van dit onderzoek en kunnen onderhevig zijn aan veranderingen. Ook zullen ze over het algemeen lager liggen voor installerende bedrijven, die eventueel kunnen genieten van bulkkortingen. Ze zijn enkel bedoeld als vergelijkende waarde en dienen met een korrel zout genomen te worden.
 
 \section{RFID}
 \label{sec:met-rfid}
 Voor de RFID opstellingen wordt gebruik gemaakt van vlakke, wide beam KEONN Advantenna-p11 antennes. Deze stralen voor zich uit met een relatief wijd veld van 90° volgens zowel de x- als y-as \autocite{Keonn}. Deze zijn ideaal om te bepalen of er een tag de antenne voorbij komt.
-Als transceiver wordt een 4-port IMPINJ Speedway Revolution gebruikt, deze maakt het mogelijk om 4 antennes tegelijk aan te sluiten. De gebruikte tags zijn standaard RFID tags van ~ 9 x 1.5cm, met 1 antenne in 1 richting. Verder zenden de antennes een EM veld uit met Tx = 20dB. De resultaten van de test worden opgevangen en gevisualiseerd met ARTA \footnote{Zie Sectie~\ref{sec:lit-software} op pagina~\pageref{sec:lit-software}}.
+Als transceiver wordt een 4-port IMPINJ Speedway Revolution gebruikt, deze maakt het mogelijk om 4 antennes tegelijk aan te sluiten. De gebruikte tags zijn standaard RFID tags van ~ 9 x 1.5cm, met 1 antenne in 1 richting en worden geplaatst op een plastic ondergrond. Verder zenden de antennes een EM veld uit met Tx = 20dB. De resultaten van de test worden opgevangen en gevisualiseerd met ARTA \footnote{Zie Sectie~\ref{sec:lit-software} op pagina~\pageref{sec:lit-software}}.
+
+\subsubsection{Kostprijs}
+\begin{itemize}
+\item KEONN Advantenna-p11 \(\approx\) €50 \autocite{theRFIDstore2022}
+\item IMPINJ Speedway Revolution \(\approx\) €1350 (2-port) - €1700 (4-port) \autocite{theRFIDstore2022a}
+\item RFID-tags \(\approx\) enkele centen tot enkele euro's per stuk, afhankelijk van de soort en grootte. Voor de tags in dit onderzoek enkele centen. \autocite{LogisCenter2022}
+\end{itemize}
 
 \section{BLE}
 \label{sec:met-ble}
-In de BLE opstellingen wordt gebruik gemaakt van MIKROTIK Knot IoT Gateways, welke hun data over de waargenomen BLE beacons elke 30s (Statische opstellingen) of 1s (Dynamische opstellingen) zullen doorsturen via een MQTT queue naar een custom tussenprogramma. Deze data bevat per beacon het gemiddelde van de ontvangen RSSI waardes uit deze periode, alsook het aantal ontvangen berichten en de maximaal ontvangen RSSI waarde. Deze ontvangen data zal door het tussenprogramma worden geëxporteerd naar een .xlsx bestand, waarna het kan geanalyseerd en gevisualiseerd worden. Er zullen verschillende modellen MOKOSMART beacons gebruikt worden, welke zullen benoemd worden per experiment. Deze staan ingesteld op een Tx Power van -12dB.
+In de BLE opstellingen wordt gebruik gemaakt van MIKROTIK Knot IoT Gateways, welke hun data over de waargenomen BLE beacons elke 30s (Statische opstellingen) of 1s (Dynamische opstellingen) zullen doorsturen via een MQTT queue naar een custom tussenprogramma. Deze data bevat per beacon het gemiddelde van de ontvangen RSSI waardes uit deze periode, alsook het aantal ontvangen berichten en de maximaal ontvangen RSSI waarde. Deze ontvangen data zal door het tussenprogramma worden geëxporteerd naar een .xlsx bestand, waarna het kan geanalyseerd en gevisualiseerd worden. Er zullen MOKOSMART H5 en M2 beacons gebruikt worden, welke zullen benoemd worden per experiment. Deze staan ingesteld op een Tx Power van -12dB.
 
-
+\subsubsection{Kostprijs}
+\begin{itemize}
+	\item MIKROTIK Knot \(\approx\) €100 \autocite{Mikrotik2020}
+	\item MOKOSMART beacon \(\approx\) €10 \autocite{MarCom2021}
+\end{itemize}
 
 
 
