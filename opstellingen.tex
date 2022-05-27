@@ -6,13 +6,13 @@
 \label{ch:opstellingen}
 
 In dit hoofdstuk worden de 12 verschillende opstellingen die in Hoofdstuk~\ref{ch:testen} onderzocht worden opgelijst. Hieraan toegevoegd is een ruwe schets van het concept van deze opstelling en een korte uitleg over hoe deze opstelling theoretisch zou moeten werken. Verder worden ook de eventuele theoretische voor- en nadelen gegeven. Ook is het een analyse van de opstellingen vanuit de theoretische achtergrond opgedaan in Hoofdstuk~\ref{ch:literatuurstudie}. De verschillende opstellingen zullen onderverdeeld worden per categorie, allereerst op technologie, maar verder ook volgens het statische of het dynamische principe. 
-Deze laatste onderverdeling houd als volgt in:
+Deze laatste onderverdeling houdt als volgt in:
 \begin{itemize}
 	\item \underline{Statisch}:
-	In een statische opstelling wordt elk voorwerp gekenmerkt door 1 RFID Tag of BLE beacon, en de locatie waarop deze zich bevind wordt gekenmerkt door een bepaald aantal readers (RFID-antennes of IoT Gateways), die de signalen van deze voorwerpen opvangen. Aan de hand van deze data wordt de locatie idealiter bekend.
+	In een statische opstelling wordt elk voorwerp gekenmerkt door 1 RFID Tag of BLE beacon, en de locatie waarop deze zich bevindt wordt gekenmerkt door een bepaald aantal readers (RFID-antennes of IoT Gateways), die de signalen van deze voorwerpen opvangen. Aan de hand van deze data wordt de locatie idealiter bekend.
 	\item \underline{Dynamisch}:
 	Bij een dynamische opstelling worden zowel de voorwerpen als de locaties gedefinieerd door RFID tags of BLE beacons. Hierbij is het concept dat de readers (RFID-antennes of IoT Gateways) zich verplaatsen in het gebouw. De info die hieruit vloeit zal verder geaggregeerd worden en daaruit zullen de locaties van de voorwerpen bepaald worden. Dit systeem is minder real-time dan een statische opstelling aangezien de locatiedata niet meteen na het meten beschikbaar is, maar er eerst op een groot aantal meetpunten een berekening moet gebeuren. Ook is het zo dat, door het feit dat de reader rondgaat, niet elk voorwerp op elk moment 'zichtbaar' is voor de reader, en een verplaatsing maar kan worden opgemerkt als de reader voorbij de nieuwe locatie van het voorwerp komt. Echter is het wel kostendrukkend aangezien een reader veel meer kost dan een tag of beacon, met een kostenvoordeel tot gevolg als hun aantal kan geminimaliseerd worden.
-	In theorie kunnen deze readers overal rondgaan, welke voor een RFID opstelling ook zo zal zijn. Echter is er, in samenspraak met Aucxis en het in beschouwing nemen van hun noden, beslist dat de IoT Gateways voor de BLE scenario's enkel in de gang tussen de locaties zullen rondgaan.
+	In theorie kunnen deze readers overal rondgaan, wat voor een RFID opstelling ook zo zal zijn. Echter is er, in samenspraak met Aucxis en het in beschouwing nemen van hun noden, beslist dat de IoT Gateways voor de BLE scenario's enkel in de gang tussen de locaties zullen rondgaan.
 \end{itemize}
 
 \subsubsection{De Illustratie}
@@ -54,7 +54,7 @@ Ook dit is 1 van de opstellingen die momenteel wordt gebruikt door Aucxis en is 
 
 \subsubsection{1 antenne tegenover deur}
 \begin{minipage}{0.65\textwidth}
-Bij deze opstelling wordt een RFID antenne tegenover de deur geplaatst. Het idee hierachter is het feit dat, aangezien de RSSI afhankelijk is van de afstand tussen de antenne en de tag, het in theorie zichtbaar is aan de verandering in RSSI in welke richting de tag gaat. Ook geeft de antenne een doppler waarde mee, welke in theorie ook veranderd naargelang de richting. Als dit in praktijk blijkt te werken wilt dit zeggen dat er richtingsdetectie mogelijk is met 1 antenne, waardoor het sowieso al beter is dan de vorige 2 opstellingen. De verwachting is wel dat de kamer niet te breed mag zijn, zodat de antenne van de gemonteerde antenne tot de deur niet te groot is. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-rfid-static-3}.
+Bij deze opstelling wordt een RFID antenne tegenover de deur geplaatst. Het idee hierachter is het feit dat, aangezien de RSSI afhankelijk is van de afstand tussen de antenne en de tag, het in theorie zichtbaar is aan de verandering in RSSI in welke richting de tag gaat. Ook geeft de antenne een doppler waarde mee, die in theorie ook verandert naargelang de richting. Als dit in praktijk blijkt te werken wil dit zeggen dat er richtingsdetectie mogelijk is met 1 antenne, waardoor het sowieso al beter is dan de vorige 2 opstellingen. De verwachting is wel dat de kamer niet te breed mag zijn, zodat de antenne van de gemonteerde antenne tot de deur niet te groot is. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-rfid-static-3}.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -79,10 +79,9 @@ Hier hangt een RFID-tag aan de deurlijst (analoog aan de antenne bij de eerste s
 \label{sec:ops-ble}
 
 \subsection{Statisch}
-
 \subsubsection{1 gateway per locatie}
 \begin{minipage}{0.65\textwidth}
-Deze opstelling is de eenvoudigste en meest intuïtieve van de BLE opstellingen. Elke locatie komt overeen met 1 IoT Gateway, die gepositioneerd wordt in het middelpunt van de locatie. Het idee hierachter is dat de Gateway waar de beacon zich het dichtste bij bevind, en de hoogste RSSI waarde heeft, de locatie is waar het voorwerp zich bevind. Echter is de verwachting dat dit niet volledig zal kloppen, en dat er hier zeker onnauwkeurigheden zullen ontstaan, specifiek als de locaties niet evenredig verdeeld zijn over het gebouw. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-static-1}.
+Deze opstelling is de eenvoudigste en meest intuïtieve van de BLE opstellingen. Elke locatie komt overeen met 1 IoT Gateway, die gepositioneerd wordt in het middelpunt van de locatie. Het idee hierachter is dat de Gateway waar de beacon zich het dichtste bij bevindt, en de hoogste RSSI waarde heeft, de locatie is waar het voorwerp zich bevindt. Echter is de verwachting dat dit niet volledig zal kloppen en dat er hier zeker onnauwkeurigheden zullen ontstaan, specifiek als de locaties niet evenredig verdeeld zijn over het gebouw. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-static-1}.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -93,7 +92,7 @@ Deze opstelling is de eenvoudigste en meest intuïtieve van de BLE opstellingen.
 
 \subsubsection{Meerdere gateways per locatie}
 \begin{minipage}{0.65\textwidth}
-In deze opstelling wordt een locatie gedefinieerd door meer dan 1 gateway, nl. een gateway per hoek van de locatie, zodat de locatie wordt omringd door een kader van gateways. Het idee hierbij is dat er aan de data kan afgeleid worden of de beacon zich al dan niet in het vak tussen de gateways bevind, dit door een principe van hoogste som van RSSI-waardes. Echter zal de kost voor de opstelling vrij snel de hoogte in vliegen als er veel locaties zijn. Wel kunnen gedeelde hoeken van locaties door een gedeelde beacon worden bezet, wat ook zo zal zijn in de testopstellingen. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-static-2}.
+In deze opstelling wordt een locatie gedefinieerd door meer dan 1 gateway, nl. een gateway per hoek van de locatie, zodat de locatie wordt omringd door een kader van gateways. Het idee hierbij is dat er aan de data kan afgeleid worden of de beacon zich al dan niet in het vak tussen de gateways bevindt, dit door een principe van hoogste som van RSSI-waardes. Echter zal de kost voor de opstelling vrij snel de hoogte in vliegen als er veel locaties zijn. Wel kunnen gedeelde hoeken van locaties door een gedeelde beacon worden bezet, wat ook zo zal zijn in de testopstellingen. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-static-2}.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -104,19 +103,19 @@ In deze opstelling wordt een locatie gedefinieerd door meer dan 1 gateway, nl. e
 
 \subsubsection{Gateways in rasteropstelling}
 \begin{minipage}{0.65\textwidth}
-Deze opstelling bestaat uit een raster welke volledig het gebouw omvat. Als de locaties van deze gateways bekend zijn kan via trilateratie\footnotemark met de gemeten RSSI waardes berekend worden waar de voorwerpen zich bevinden, wat dan gelinkt kan worden aan een locatie. De verwachting is dat hiermee de locatie vrij specifiek kan worden bepaald, maar nadelig is wel er meer data zal moeten bijgehouden worden, zoals definities van de locaties in het raster etc. Daardoor kan er niet enkel op data van de gateways worden afgegaan om de locatie te bepalen aangezien in de opstelling de gateways en de locaties niks met elkaar te maken hebben. Deze opstelling lijkt wel meer en eenvoudiger opschaalbaar naar grotere gebouwen of gebouwen met veel dicht bij elkaar liggende locaties. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-static-3}.
+Deze opstelling bestaat uit een raster welke volledig het gebouw omvat. Als de locaties van deze gateways bekend zijn, kan via trilateratie\footnotemark met de gemeten RSSI waardes berekend worden waar de voorwerpen zich bevinden, wat dan gelinkt kan worden aan een locatie. De verwachting is dat hiermee de locatie vrij specifiek kan worden bepaald, maar nadelig is wel dat er meer data zal moeten bijgehouden worden, zoals definities van de locaties in het raster etc. Daardoor kan er niet enkel op data van de gateways worden afgegaan om de locatie te bepalen aangezien in de opstelling de gateways en de locaties niks met elkaar te maken hebben. Deze opstelling lijkt wel meer en eenvoudiger opschaalbaar naar grotere gebouwen of gebouwen met veel dicht bij elkaar liggende locaties. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-static-3}.
 \end{minipage}
 \footnotetext{Zie sectie~\ref{sec:lit-definities} op pagina~\pageref{sec:lit-definities}}
 \hfill
 \begin{minipage}{0.30\textwidth}
 	\includegraphics[width=\linewidth]{ble_statisch_3}
-	\captionof{figure}{Illustratie gateways in rasteropstelling}
+	\captionof{figure}{Illustratie gateways in raster\-opstelling}
 	\label{fig:ops-ble-static-3}
 \end{minipage}
 
 
 \subsection{Dynamisch}
-Bij elk van volgende opstellingen zal een onderscheid gemaakt worden in de BLE beacons, nl. de locatie- en de asset-beacons.
+Bij elk van volgende opstellingen zal een onderscheid gemaakt worden in de BLE beacons, nl. de locatie- en de assetbeacons.
 
 \subsubsection{1 locatiebeacon per locatie, midden van locatie}
 \begin{minipage}{0.65\textwidth}
@@ -153,7 +152,7 @@ Dit is de dynamische tegenhanger van het 2e statische scenario, echter wordt in 
 
 \subsubsection{Locatiebeacons in rasteropstelling}
 \begin{minipage}{0.65\textwidth}
-Dit is de dynamische tegenhanger van het 3e statische scenario, nl. een raster van locatiebeacons. In theorie kunnen hierbij de locaties van de assetbeacons bepaald worden door dubbele trilateratie. De locatie van de mobiele gateway kan bepaald worden op 2 meetpunten a.d.h.v. de geweten locatie van de locatiebeacons, en uit deze 2 locaties kan dan nog eens via trilateratie de locatie van de assetbeacons worden bepaald. Het vermoeden bestaat echter dat dit eventuele onnauwkeurigheden bij de eerste trilateratie kan vergroten door een 2e toe te passen. Verder wordt er ook verondersteld dat het asset niet beweegt tussen deze gebruikte meetpunten, maar dit is bij uitbreiding voor elke dynamische opstelling zo. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-dynamic-4}.
+Dit is de dynamische tegenhanger van het 3e statische scenario, nl. een raster van locatiebeacons. In theorie kunnen hierbij de locaties van de assetbeacons bepaald worden door dubbele trilateratie. De locatie van de mobiele gateway kan bepaald worden op 2 meetpunten a.d.h.v. de geweten locatie van de locatiebeacons en uit deze 2 locaties kan dan nog eens via trilateratie de locatie van de assetbeacons worden bepaald. Het vermoeden bestaat echter dat dit eventuele onnauwkeurigheden bij de eerste trilateratie kan vergroten door een 2e toe te passen. Verder wordt er ook verondersteld dat het asset niet beweegt tussen deze gebruikte meetpunten, maar dit is bij uitbreiding voor elke dynamische opstelling zo. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-dynamic-4}.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -164,7 +163,7 @@ Dit is de dynamische tegenhanger van het 3e statische scenario, nl. een raster v
 
 \subsubsection{Locatiebeacons op intervallen in de gang}
 \begin{minipage}{0.65\textwidth}
-Bij deze laatste opstelling worden er geen beacons in de locaties geplaatst, maar in de gang. Op deze manier worden de locaties en locatiebeacons 'ontkoppeld' en is er niet meer voor elke locatie een beacon nodig, wat kostendrukkend kan zijn. Deze locatiebeacons bevinden zich op constante intervallen van elkaar. In theorie weet de mobiele gateway hieraan waar hij zich bevind in de gang, als er geweten is op welke 'afstand' in de gang welke locatie zich bevind kan er bepaald worden welke assetbeacons zich op welke locatie bevinden. Hier is ook een gelijkaardig nadeel dan bij de rasteropstellingen, nl. dat er meer data nodig is voor de lokalisatie die niet van de beacons komt. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-dynamic-5}.
+Bij deze laatste opstelling worden er geen beacons in de locaties geplaatst, maar in de gang. Op deze manier worden de locaties en locatiebeacons 'ontkoppeld' en is er niet meer voor elke locatie een beacon nodig, wat kostendrukkend kan zijn. Deze locatiebeacons bevinden zich op constante intervallen van elkaar. In theorie weet de mobiele gateway hieraan waar hij zich bevindt in de gang, als er geweten is op welke 'afstand' in de gang welke locatie zich bevindt kan er bepaald worden welke assetbeacons zich op welke locatie bevinden. Hier is ook een gelijkaardig nadeel als bij de rasteropstellingen, nl. dat er meer data nodig is voor de lokalisatie die niet van de beacons komt. Deze opstelling staat geïllustreerd op figuur~\ref{fig:ops-ble-dynamic-5}.
 \end{minipage}
 \hfill
 \begin{minipage}{0.30\textwidth}
@@ -174,6 +173,6 @@ Bij deze laatste opstelling worden er geen beacons in de locaties geplaatst, maa
 \end{minipage}
 
 \section{Fundamentele verschillen}
-Tussen opstellingen gebaseerd op RFID en op BLE zijn enkele fundamentele verschillen, deze volgen voornamelijk uit het feit dat RFID een passieve technologie, en BLE een actieve technologie is. Allereerst is het zo dat BLE beacons, door hun batterij, meer onderhoud vragen dan RFID tags, aangezien het mogelijk is dat de batterij moet worden vervangen. Verder is er een verschil op kostprijs: bij RFID is de infrastructuur duur, maar de tags zeer goedkoop. Het is dus zeer goedkoop om, als de infrastructuur aanwezig is, meer getagde assets toe te voegen. Bij BLE liggen kostprijzen van gateways en beacons niet veel grootteordes uit elkaar, waardoor een systeem met BLE uitrollen relatief goedkoop is, maar meer getagde assets toevoegen heeft nog steeds een significante kostprijs heeft\footnote{In hoofdstuk~\ref{ch:methodologie} worden de prijzen specifieker beschreven.}. Als laatste is BLE fundamenteel beter voor het lokaliseren van assets, omdat elke beacon continu stuurt. Hierdoor wordt elk getagd asset in elk geval 'gezien' door het systeem en is het snel duidelijk als iets verdwijnt of verplaatst wordt. Bij RFID \emph{moet} de verplaatsing gebeuren door een doorgang met een reader, anders wordt deze niet geregistreerd. Voor een systeem dat hiermee werkt is de asset nog steeds op zijn vorige locatie terwijl dit niet correct is, bij BLE is het snel duidelijk als een asset verplaatst of weg is want dan wordt hij elders of niet meer gedetecteerd.
+Tussen opstellingen gebaseerd op RFID en op BLE zijn enkele fundamentele verschillen. Deze volgen voornamelijk uit het feit dat RFID een passieve technologie, en BLE een actieve technologie is. Allereerst is het zo dat BLE beacons, door hun batterij, meer onderhoud vragen dan RFID tags, aangezien het mogelijk is dat de batterij moet worden vervangen. Verder is er een verschil op kostprijs: bij RFID is de infrastructuur duur, maar de tags zeer goedkoop. Het is dus zeer goedkoop om, als de infrastructuur aanwezig is, meer getagde assets toe te voegen. Bij BLE liggen kostprijzen van gateways en beacons niet veel grootteordes uit elkaar, waardoor een systeem met BLE uitrollen relatief goedkoop is, maar meer getagde assets toevoegen nog steeds een significante kostprijs heeft\footnote{In hoofdstuk~\ref{ch:methodologie} worden de prijzen specifieker beschreven.}. Als laatste is BLE fundamenteel beter voor het lokaliseren van assets, omdat elke beacon continu stuurt. Hierdoor wordt elk getagd asset in elk geval 'gezien' door het systeem en is het snel duidelijk als iets verdwijnt of verplaatst wordt. Bij RFID \emph{moet} de verplaatsing gebeuren door een doorgang met een reader, anders wordt deze niet geregistreerd. Voor een systeem dat hiermee werkt is de asset nog steeds op zijn vorige locatie terwijl dit niet correct is, bij BLE is het snel duidelijk als een asset verplaatst of weg is want dan wordt hij elders of niet meer gedetecteerd.
 
 
